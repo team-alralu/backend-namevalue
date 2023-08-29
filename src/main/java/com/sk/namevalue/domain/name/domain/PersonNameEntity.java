@@ -26,5 +26,8 @@ public class PersonNameEntity {
     private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
-    private List<NameAnimalEntity> animalList;
+    private List<PersonNameAnimalEntity> animalList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList = new ArrayList<>();
 }
