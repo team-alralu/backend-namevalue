@@ -1,5 +1,6 @@
 package com.sk.namevalue.domain.user.domain;
 
+import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.model.enums.OAuthType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_user")
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)

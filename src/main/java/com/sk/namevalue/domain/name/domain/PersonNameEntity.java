@@ -1,5 +1,6 @@
 package com.sk.namevalue.domain.name.domain;
 
+import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "tbl_name")
-public class PersonNameEntity {
+public class PersonNameEntity extends BaseEntity {
 
     @Id
     @Column(name = "person_name", nullable = false)

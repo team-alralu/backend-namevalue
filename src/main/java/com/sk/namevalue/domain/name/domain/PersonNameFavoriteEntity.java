@@ -1,6 +1,7 @@
 package com.sk.namevalue.domain.name.domain;
 
 import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
+import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -14,7 +15,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_name_favorite")
-public class PersonNameFavoriteEntity {
+public class PersonNameFavoriteEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name_favorite_id")

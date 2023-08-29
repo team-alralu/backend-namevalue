@@ -1,5 +1,6 @@
 package com.sk.namevalue.domain.personality.domain;
 
+import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -13,7 +14,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_personality")
-public class PersonalityEntity {
+public class PersonalityEntity extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "personality_id")

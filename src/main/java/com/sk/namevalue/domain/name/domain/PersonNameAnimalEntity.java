@@ -1,6 +1,7 @@
 package com.sk.namevalue.domain.name.domain;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
+import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -14,7 +15,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_name_animal")
-public class PersonNameAnimalEntity {
+public class PersonNameAnimalEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name_animal_id")
