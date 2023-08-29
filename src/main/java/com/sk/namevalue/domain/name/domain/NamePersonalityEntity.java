@@ -1,5 +1,6 @@
 package com.sk.namevalue.domain.name.domain;
 
+import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 

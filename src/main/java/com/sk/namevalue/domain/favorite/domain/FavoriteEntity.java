@@ -1,5 +1,6 @@
-package com.sk.namevalue.domain.name.domain;
+package com.sk.namevalue.domain.favorite.domain;
 
+import com.sk.namevalue.domain.name.domain.NameFavoriteEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -28,6 +29,6 @@ public class FavoriteEntity {
     @Column(name = "emoji", nullable = false)
     private String emoji;
 
-    @OneToMany(mappedBy = "favorite")
+    @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NameFavoriteEntity> nameFavoriteList = new ArrayList<>();
 }
