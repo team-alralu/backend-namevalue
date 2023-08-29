@@ -1,4 +1,4 @@
-package com.sk.namevalue.entity;
+package com.sk.namevalue.domain.name.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

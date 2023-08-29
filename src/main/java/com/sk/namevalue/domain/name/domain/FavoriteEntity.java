@@ -1,24 +1,25 @@
-package com.sk.namevalue.entity;
+package com.sk.namevalue.domain.name.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * title        : 동물 엔티티
+ * title        : 흥미 엔티티
  * author       : sim
  * date         : 2023-08-28
- * description  : 동물 엔티티 클래스
+ * description  : 좋아하는 것에 대한 엔티티
  */
 
 @Entity
 @Getter
-@Table(name = "tbl_animal")
-public class AnimalEntity {
+@Table(name = "tbl_favorite")
+public class FavoriteEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_id")
+    @Column(name = "favorite_id")
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -27,6 +28,6 @@ public class AnimalEntity {
     @Column(name = "emoji", nullable = false)
     private String emoji;
 
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NameAnimalEntity> animalEntityList;
+    @OneToMany(mappedBy = "favorite")
+    private List<NameFavoriteEntity> nameFavoriteList = new ArrayList<>();
 }

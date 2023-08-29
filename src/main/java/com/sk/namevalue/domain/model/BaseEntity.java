@@ -1,4 +1,4 @@
-package com.sk.namevalue.entity;
+package com.sk.namevalue.domain.model;
 
 
 import jakarta.persistence.Column;

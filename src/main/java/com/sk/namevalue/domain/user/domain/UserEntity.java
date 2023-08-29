@@ -1,6 +1,6 @@
-package com.sk.namevalue.entity;
+package com.sk.namevalue.domain.user.domain;
 
-import com.sk.namevalue.enums.OAuthType;
+import com.sk.namevalue.domain.model.enums.OAuthType;
 import jakarta.persistence.*;
 import lombok.Getter;
 
