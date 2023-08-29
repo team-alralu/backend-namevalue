@@ -14,7 +14,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_name_favorite")
-public class NameFavoriteEntity {
+public class PersonNameFavoriteEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name_favorite_id")
@@ -22,7 +22,7 @@ public class NameFavoriteEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_name")
-    private NameEntity personName;
+    private PersonNameEntity personName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "favorite_id")

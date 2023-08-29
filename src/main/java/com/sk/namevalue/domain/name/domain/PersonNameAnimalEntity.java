@@ -14,7 +14,7 @@ import lombok.Getter;
 @Entity
 @Getter
 @Table(name = "tbl_name_animal")
-public class NameAnimalEntity {
+public class PersonNameAnimalEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name_animal_id")
@@ -22,7 +22,7 @@ public class NameAnimalEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_name", nullable = false)
-    private NameEntity personName;
+    private PersonNameEntity personName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "animal_id", nullable = false)

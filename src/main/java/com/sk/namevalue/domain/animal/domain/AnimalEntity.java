@@ -1,6 +1,6 @@
 package com.sk.namevalue.domain.animal.domain;
 
-import com.sk.namevalue.domain.name.domain.NameAnimalEntity;
+import com.sk.namevalue.domain.name.domain.PersonNameAnimalEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -29,5 +29,5 @@ public class AnimalEntity {
     private String emoji;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NameAnimalEntity> animalEntityList;
+    private List<PersonNameAnimalEntity> animalEntityList;
 }

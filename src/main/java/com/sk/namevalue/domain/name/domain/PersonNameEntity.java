@@ -3,6 +3,7 @@ package com.sk.namevalue.domain.name.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,14 +16,14 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "tbl_name")
-public class NameEntity {
+public class PersonNameEntity {
 
     @Id
     @Column(name = "person_name", nullable = false)
     private String personName;
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
-    private List<NamePersonalityEntity> personalityList;
+    private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<NameAnimalEntity> animalList;
