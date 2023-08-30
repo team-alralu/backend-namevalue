@@ -3,6 +3,7 @@ package com.sk.namevalue.domain.name.domain;
 import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * title        : 이름 한줄평 엔티티
@@ -13,6 +14,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @Table(name = "tbl_name_review")
 public class ReviewEntity extends BaseEntity {
 
@@ -27,4 +29,8 @@ public class ReviewEntity extends BaseEntity {
     @Column(name = "content", nullable = false, length = 100)
     private String content;
 
+    public ReviewEntity(PersonNameEntity personName, String content){
+        this.personName = personName;
+        this.content = content;
+    }
 }
