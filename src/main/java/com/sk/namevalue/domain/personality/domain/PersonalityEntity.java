@@ -3,6 +3,7 @@ package com.sk.namevalue.domain.personality.domain;
 import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * title        : 성격 엔티티
@@ -13,10 +14,11 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @Table(name = "tbl_personality")
 public class PersonalityEntity extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "personality_id")
     private Long personalityId;
 
@@ -28,4 +30,10 @@ public class PersonalityEntity extends BaseEntity {
 
     @Column(name = "point", nullable = false)
     private int point;
+
+    public PersonalityEntity(String name, String emoji, int point){
+        this.name = name;
+        this.emoji = emoji;
+        this.point = point;
+    }
 }
