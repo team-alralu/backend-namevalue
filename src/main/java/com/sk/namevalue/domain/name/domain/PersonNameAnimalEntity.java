@@ -4,6 +4,7 @@ import com.sk.namevalue.domain.animal.domain.AnimalEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * title        : 이름_동물 엔티티
@@ -14,6 +15,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @Table(name = "tbl_name_animal")
 public class PersonNameAnimalEntity extends BaseEntity {
 
@@ -29,4 +31,8 @@ public class PersonNameAnimalEntity extends BaseEntity {
     @JoinColumn(name = "animal_id", nullable = false)
     private AnimalEntity animal;
 
+    public PersonNameAnimalEntity(PersonNameEntity personName, AnimalEntity animal){
+        this.personName = personName;
+        this.animal = animal;
+    }
 }
