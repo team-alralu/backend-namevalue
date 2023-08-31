@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "tbl_name_personality")
+@Table(name = "tbl_person_name_personality")
 public class PersonNamePersonalityEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,16 @@ public class PersonNamePersonalityEntity extends BaseEntity {
     @JoinColumn(name = "personality_id", nullable = false)
     private PersonalityEntity personality;
 
+    public static PersonNamePersonalityEntity createPersonNamePersonalityEntity(
+            PersonNameEntity personName, PersonalityEntity personality){
+        return new PersonNamePersonalityEntity(personName, personality);
+    }
     /**
      * PersonNamePersonalityEntity 생성자
      * @param personName - 사람 이름 엔티티
      * @param personality - 성격 엔티티
-     * 같은 패키지에 위치한 엔티티 클래스에서만 사용할 수 있도록 접근 제어자를 protected 로 선언함.
      */
-    protected PersonNamePersonalityEntity(PersonNameEntity personName, PersonalityEntity personality){
+    private PersonNamePersonalityEntity(PersonNameEntity personName, PersonalityEntity personality){
         this.personName = personName;
         this.personality = personality;
     }

@@ -29,7 +29,10 @@ public class ReviewEntity extends BaseEntity {
     @Column(name = "content", nullable = false, length = 100)
     private String content;
 
-    public ReviewEntity(PersonNameEntity personName, String content){
+    public static ReviewEntity createReviewEntity(PersonNameEntity personName, String content){
+        return new ReviewEntity(personName,content);
+    }
+    private ReviewEntity(PersonNameEntity personName, String content){
         this.personName = personName;
         this.content = content;
     }

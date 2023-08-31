@@ -31,7 +31,10 @@ public class PersonalityEntity extends BaseEntity {
     @Column(name = "point", nullable = false)
     private int point;
 
-    public PersonalityEntity(String name, String emoji, int point){
+    public static PersonalityEntity createPersonalityEntity(String name, String emoji, int point){
+        return new PersonalityEntity(name, emoji, point);
+    }
+    private PersonalityEntity(String name, String emoji, int point){
         this.name = name;
         this.emoji = emoji;
         this.point = point;

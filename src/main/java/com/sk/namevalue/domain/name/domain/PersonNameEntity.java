@@ -27,7 +27,7 @@ public class PersonNameEntity extends BaseEntity {
     @Column(name = "person_name")
     private String personName;
 
-    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
@@ -42,7 +42,7 @@ public class PersonNameEntity extends BaseEntity {
      * reviewList에 추가만 해주면 영속성 전이에 의해 ReviewEntity에 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addReview(String content){
-        ReviewEntity reviewEntity = new ReviewEntity(this, content);
+        ReviewEntity reviewEntity = ReviewEntity.createReviewEntity(this, content);
         this.reviewList.add(reviewEntity);
     }
 
@@ -52,7 +52,7 @@ public class PersonNameEntity extends BaseEntity {
      * animalList에 추가만 해주면 영속성 전이에 의해 PersonNameAnimalEntity에 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addAnimal(AnimalEntity animal){
-        PersonNameAnimalEntity personNameAnimalEntity = new PersonNameAnimalEntity(this, animal);
+        PersonNameAnimalEntity personNameAnimalEntity = PersonNameAnimalEntity.createPersonNameAnimalEntity(this, animal);
         this.animalList.add(personNameAnimalEntity);
     }
 
@@ -62,11 +62,14 @@ public class PersonNameEntity extends BaseEntity {
      * personalityList에 추가만 해주면 영속성 전이에 의해 PersonNamePersonalityEntity 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addPersonality(PersonalityEntity personality){
-        PersonNamePersonalityEntity personNamePersonality = new PersonNamePersonalityEntity(this, personality);
+        PersonNamePersonalityEntity personNamePersonality = PersonNamePersonalityEntity.createPersonNamePersonalityEntity(this, personality);
         this.personalityList.add(personNamePersonality);
     }
 
-    public PersonNameEntity(String personName){
+    public static PersonNameEntity createPersonName(String personName){
+        return new PersonNameEntity(personName);
+    }
+    private PersonNameEntity(String personName){
         this.personName = personName;
     }
 

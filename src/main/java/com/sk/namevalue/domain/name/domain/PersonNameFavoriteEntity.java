@@ -14,7 +14,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@Table(name = "tbl_name_favorite")
+@Table(name = "tbl_person_name_favorite")
 public class PersonNameFavoriteEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

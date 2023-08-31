@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "tbl_name_animal")
+@Table(name = "tbl_person_name_animal")
 public class PersonNameAnimalEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,11 @@ public class PersonNameAnimalEntity extends BaseEntity {
     @JoinColumn(name = "animal_id", nullable = false)
     private AnimalEntity animal;
 
-    public PersonNameAnimalEntity(PersonNameEntity personName, AnimalEntity animal){
+    public static PersonNameAnimalEntity createPersonNameAnimalEntity(PersonNameEntity personName, AnimalEntity animal){
+        return new PersonNameAnimalEntity(personName, animal);
+    }
+
+    private PersonNameAnimalEntity(PersonNameEntity personName, AnimalEntity animal){
         this.personName = personName;
         this.animal = animal;
     }
