@@ -1,0 +1,10 @@
+server:
+  port: 1111
+
+spring:
+  profiles:
+    include: oauth2, db
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true

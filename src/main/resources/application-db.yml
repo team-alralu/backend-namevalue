@@ -1,0 +1,10 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+    url: ENC(JogH7qWP/1NlbhqGq/G4fZlMIofI7DKkAefigKW5W/ITJI9IilazFbFrtdwDrgn0)
+
