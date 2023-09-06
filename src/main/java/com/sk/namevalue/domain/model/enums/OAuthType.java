@@ -13,11 +13,13 @@ import lombok.Getter;
 public enum OAuthType {
 
     KAKAO("kakao")
-    , NAVER("naver");
+    , NAVER("naver")
+    , GOOGLE("google");
 
-    private final String value;
+    private final String registrationId;
 
-    OAuthType(String value){
-        this.value = value;
+
+    OAuthType(String registrationId){
+        this.registrationId = registrationId;
     }
 }
