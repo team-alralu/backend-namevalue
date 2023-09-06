@@ -1,5 +1,9 @@
 package com.sk.namevalue.global.config;
 
+import com.sk.namevalue.domain.user.dao.UserRepository;
+import com.sk.namevalue.infra.oauth2.CustomFailureHandler;
+import com.sk.namevalue.infra.oauth2.CustomSuccessHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,8 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final UserRepository userRepository;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -26,7 +32,9 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                 .csrf().disable()
-                .oauth2Login();
+                .oauth2Login()
+                .successHandler(new CustomSuccessHandler(userRepository))
+                .failureHandler(new CustomFailureHandler());
 
         return http.build();
     }
