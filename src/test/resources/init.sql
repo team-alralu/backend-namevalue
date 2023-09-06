@@ -1,0 +1,1 @@
+insert into tbl_user(user_id, email, name, oauth_type, create_date) values (1, 'valid@naver.com', '홍길동', 'NAVER', current_timestamp());
