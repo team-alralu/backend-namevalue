@@ -17,6 +17,14 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
             redirect-uri: http://localhost:1111/login/oauth2/code/kakao
+          google:
+            client-id: 1079644014888-2jgags7416omn8ujgglsengc0lbjpuc4.apps.googleusercontent.com
+            client-secret: ENC(XMmJbM3euvzV4PIReTNev4I+IwC+/XjyogiXfLRtkuuDPq4ZZ9TJRqd1uoxR5Ti/)
+            scope: profile, email
+            client-name: google
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+            redirect-uri: http://localhost:1111/login/oauth2/code/google
         provider:
           naver:
             authorization-uri: https://nid.naver.com/oauth2.0/authorize
