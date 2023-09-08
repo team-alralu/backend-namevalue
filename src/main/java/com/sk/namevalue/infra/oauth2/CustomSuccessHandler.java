@@ -2,6 +2,7 @@ package com.sk.namevalue.infra.oauth2;
 
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
+import com.sk.namevalue.global.auth.JwtProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final UserRepository userRepository;
 
+    private final JwtProvider jwtProvider;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
@@ -34,14 +37,21 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         Map<String,Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");
-        UserEntity findUser = userRepository.findByEmail(email);
+        UserEntity userEntity = userRepository.findByEmail(email);
 
-        if(findUser == null){
+        if(userEntity == null){
             log.info(email+" 계정에 대한 신규 유저를 생성합니다.");
-            UserEntity userEntity = UserEntity.from(attributes);
+            userEntity = UserEntity.from(attributes);
             userRepository.save(userEntity);
         }
 
+        Map<String, Object> claims = jwtProvider.generateClaims(userEntity);
+
+        String accessToken = jwtProvider.generateAccessToken(claims);
+        String refreshToken = jwtProvider.generateRefreshToken(claims);
+
+        log.info(accessToken);
+        log.info(refreshToken);
         responseRedirectUrl(request, response);
     }
 
