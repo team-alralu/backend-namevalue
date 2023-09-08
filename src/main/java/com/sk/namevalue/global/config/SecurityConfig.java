@@ -1,6 +1,7 @@
 package com.sk.namevalue.global.config;
 
 import com.sk.namevalue.domain.user.dao.UserRepository;
+import com.sk.namevalue.global.auth.JwtProvider;
 import com.sk.namevalue.infra.oauth2.CustomFailureHandler;
 import com.sk.namevalue.infra.oauth2.CustomSuccessHandler;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserRepository userRepository;
+
+    private final JwtProvider jwtProvider;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -33,7 +36,7 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .oauth2Login()
-                .successHandler(new CustomSuccessHandler(userRepository))
+                .successHandler(new CustomSuccessHandler(userRepository, jwtProvider))
                 .failureHandler(new CustomFailureHandler());
 
         return http.build();
