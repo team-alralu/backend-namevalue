@@ -2,6 +2,7 @@ package com.sk.namevalue.global.config;
 
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.global.auth.JwtProvider;
+import com.sk.namevalue.global.filter.JwtAuthorizationFilter;
 import com.sk.namevalue.infra.oauth2.CustomFailureHandler;
 import com.sk.namevalue.infra.oauth2.CustomSuccessHandler;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * title        : Spring Security Config
@@ -37,7 +39,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .oauth2Login()
                 .successHandler(new CustomSuccessHandler(userRepository, jwtProvider))
-                .failureHandler(new CustomFailureHandler());
+                .failureHandler(new CustomFailureHandler())
+                .and()
+                .addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
