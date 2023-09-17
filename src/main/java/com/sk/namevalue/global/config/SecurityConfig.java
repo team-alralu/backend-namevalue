@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * title        : Spring Security Config
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @RequiredArgsConstructor
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     private final UserRepository userRepository;
@@ -41,7 +43,7 @@ public class SecurityConfig {
                 .successHandler(new CustomSuccessHandler(userRepository, jwtProvider))
                 .failureHandler(new CustomFailureHandler())
                 .and()
-                .addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAfter(new JwtAuthorizationFilter(jwtProvider), OAuth2AuthorizationCodeGrantFilter.class);
 
         return http.build();
     }
