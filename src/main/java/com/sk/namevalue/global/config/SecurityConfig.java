@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .successHandler(new CustomSuccessHandler(userRepository, jwtProvider))
                 .failureHandler(new CustomFailureHandler())
                 .and()
-                .addFilterAfter(new JwtAuthorizationFilter(jwtProvider), OAuth2AuthorizationCodeGrantFilter.class);
+                .addFilterAfter(new JwtAuthorizationFilter(jwtProvider), OAuth2LoginAuthenticationFilter.class);
 
         return http.build();
     }
