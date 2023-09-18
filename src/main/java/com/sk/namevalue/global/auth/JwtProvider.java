@@ -109,7 +109,9 @@ public class JwtProvider {
      */
 
     public String extractAccessToken(String authorization){
-        if(!authorization.startsWith(JWT_TYPE)){
+        if(authorization == null){
+            throw new JwtTokenException("Authorization 헤더가 없습니다. 관리자에게 문의해주세요.");
+        } else if(!authorization.startsWith(JWT_TYPE)){
             throw new JwtTokenException("잘못된 인증 헤더입니다. 다시 로그인해주세요");
         }
         return authorization.substring(JWT_TYPE.length());
