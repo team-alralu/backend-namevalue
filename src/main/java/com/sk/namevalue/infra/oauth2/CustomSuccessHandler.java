@@ -1,8 +1,11 @@
 package com.sk.namevalue.infra.oauth2;
 
+import com.sk.namevalue.domain.model.enums.Token;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
 import com.sk.namevalue.global.auth.JwtProvider;
+import com.sk.namevalue.global.util.HttpUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -52,11 +55,15 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         log.info(accessToken);
         log.info(refreshToken);
-        responseRedirectUrl(request, response);
+
+        Cookie cookie = HttpUtil.generateSecureCookie(Token.REFRESH_TOKEN.getKey(), refreshToken, Token.REFRESH_TOKEN.getMaxAge());
+        response.addCookie(cookie);
+        responseRedirectUrl(request, response, accessToken);
     }
 
-    public void responseRedirectUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String targetUrl = UriComponentsBuilder.fromUriString("/login?status=success")
+    private void responseRedirectUrl(HttpServletRequest request, HttpServletResponse response, String accessToken) throws IOException {
+        String targetUrl = UriComponentsBuilder.fromUriString("/login")
+                .queryParam(Token.ACCESS_TOKEN.getKey(),accessToken)
                 .build().toUriString();
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
