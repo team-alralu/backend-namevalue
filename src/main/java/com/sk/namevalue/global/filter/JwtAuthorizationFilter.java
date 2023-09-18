@@ -28,29 +28,39 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
 
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String TEST_TOKEN = "TEST_TOKEN";
+    private static final String CLAIM_ID = "id";
+    private static final String CLAIM_EMAIL = "email";
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        String requestURI = request.getRequestURI();
         try {
-            if(!"/login".equals(request.getRequestURI())) {
+            if(!"/login".equals(requestURI) && !requestURI.startsWith("/error")) {
+                Authentication authentication;
+                String authorizationValue = request.getHeader(AUTHORIZATION_HEADER);
+                String token = jwtProvider.extractAccessToken(authorizationValue);
 
-                String authorizationValue = request.getHeader("Authorization");
-
-                if (authorizationValue != null && authorizationValue.contains("TEST_TOKEN")) {
-                    Authentication authentication = AuthenticationFactory.from(1L);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-
-                } else if (authorizationValue != null && !authorizationValue.isBlank()) {
-                    String token = jwtProvider.extractAccessToken(authorizationValue);
-                    Long id = jwtProvider.parseJwtToken(token).get("id", Long.class);
-
-                    Authentication authentication = AuthenticationFactory.from(id);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                if(token.isBlank()){
+                    filterChain.doFilter(request, response);
+                    return;
                 }
+                else if(TEST_TOKEN.equals(token)) {
+                    authentication = AuthenticationFactory.newTestInstance();
+                }else{
+                    Long id = jwtProvider.parseJwtToken(token).get(CLAIM_ID, Long.class);
+                    String email = jwtProvider.parseJwtToken(token).get(CLAIM_EMAIL, String.class);
+                    authentication = AuthenticationFactory.of(id, email);
+                }
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
             filterChain.doFilter(request, response);
         }catch (JwtTokenException e){
-            response.sendRedirect("/login?status=fail&message=invalid_token");
+            e.printStackTrace();
+            log.error(e.getMessage());
+            response.sendRedirect("/error/401");
         }
     }
 }
