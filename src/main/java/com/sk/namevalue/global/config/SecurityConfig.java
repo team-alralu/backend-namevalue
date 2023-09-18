@@ -33,6 +33,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((authz -> authz
+                        .requestMatchers("/error/**").permitAll()
                         .requestMatchers("/api/**").hasRole("USER")
                         .anyRequest().authenticated())
                 )
