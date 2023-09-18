@@ -36,26 +36,24 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String requestURI = request.getRequestURI();
         try {
-            if(!"/login".equals(requestURI) && !requestURI.startsWith("/error")) {
-                Authentication authentication;
-                String authorizationValue = request.getHeader(AUTHORIZATION_HEADER);
-                String token = jwtProvider.extractAccessToken(authorizationValue);
+            Authentication authentication;
+            String authorizationValue = request.getHeader(AUTHORIZATION_HEADER);
+            String token = jwtProvider.extractAccessToken(authorizationValue);
 
-                if(token.isBlank()){
-                    filterChain.doFilter(request, response);
-                    return;
-                }
-                else if(TEST_TOKEN.equals(token)) {
-                    authentication = AuthenticationFactory.newTestInstance();
-                }else{
-                    Long id = jwtProvider.parseJwtToken(token).get(CLAIM_ID, Long.class);
-                    String email = jwtProvider.parseJwtToken(token).get(CLAIM_EMAIL, String.class);
-                    authentication = AuthenticationFactory.of(id, email);
-                }
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            if(token.isBlank()){
+                filterChain.doFilter(request, response);
+                return;
             }
+            else if(TEST_TOKEN.equals(token)) {
+                authentication = AuthenticationFactory.newTestInstance();
+            }else{
+                Long id = jwtProvider.parseJwtToken(token).get(CLAIM_ID, Long.class);
+                String email = jwtProvider.parseJwtToken(token).get(CLAIM_EMAIL, String.class);
+                authentication = AuthenticationFactory.of(id, email);
+            }
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
             filterChain.doFilter(request, response);
         }catch (JwtTokenException e){
             e.printStackTrace();
