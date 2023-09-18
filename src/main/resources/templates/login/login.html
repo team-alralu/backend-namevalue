@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        #login-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .oauth-icon {
+            width: 200px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-container">
+    <h1>Login</h1>
+    <img src="/img/google.png" alt="Google Login" class="oauth-icon" id="google-login"/>
+    <img src="/img/naver.png" alt="Naver Login" class="oauth-icon" id="naver-login"/>
+</div>
+
+<script>
+    document.getElementById("google-login").addEventListener("click", function() {
+        window.location.href = "/oauth2/authorization/google";
+    });
+
+    document.getElementById("naver-login").addEventListener("click", function() {
+        window.location.href = "/oauth2/authorization/naver";
+    });
+</script>
+
+</body>
+</html>
+
