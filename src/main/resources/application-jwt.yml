@@ -1,4 +1,2 @@
 jwt:
   secret-key: ENC(sJDcRsFF7D5xR15emIw80jMwbhnkpjDshfARgEdekEEyoxLU1vqJgR2Vu2jaK1Swwo0zggO8Qo3Pb2XY0dggYg==)
-  access-token-subject: ACCESS_TOKEN
-  refresh-token-subject: REFRESH_TOKEN

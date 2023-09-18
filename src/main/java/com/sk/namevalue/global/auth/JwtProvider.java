@@ -1,5 +1,6 @@
 package com.sk.namevalue.global.auth;
 
+import com.sk.namevalue.domain.model.enums.Token;
 import com.sk.namevalue.domain.user.domain.UserEntity;
 import com.sk.namevalue.global.exception.JwtTokenException;
 import io.jsonwebtoken.*;
@@ -33,14 +34,7 @@ public class JwtProvider {
 
     private final Key key;
 
-    @Value("${jwt.access-token-subject}")
-    private String accessTokenSubject;
-
-    @Value("${jwt.refresh-token-subject}")
-    private String refreshTokenSubject;
-    private final static Long ONE_HOUR = 1000*60*60L;
-
-    private final static Long TEN_DAY = 1000*60*60*24*7L;
+    private final static Long MINUTE = 1000L;
 
     /**
      * 액세스 토큰 생성
@@ -51,10 +45,10 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE,Header.JWT_TYPE)
-                .setSubject(accessTokenSubject)
+                .setSubject(Token.ACCESS_TOKEN.getKey())
                 .addClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ONE_HOUR))
+                .setExpiration(new Date(System.currentTimeMillis()+MINUTE*Token.ACCESS_TOKEN.getMaxAge()))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -68,10 +62,10 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE,Header.JWT_TYPE)
-                .setSubject(refreshTokenSubject)
+                .setSubject(Token.REFRESH_TOKEN.getKey())
                 .addClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+TEN_DAY))
+                .setExpiration(new Date(System.currentTimeMillis()+MINUTE*Token.REFRESH_TOKEN.getMaxAge()))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -107,7 +101,6 @@ public class JwtProvider {
      * @param authorization - Authorization Header
      * @return 완전한 JWT 토큰
      */
-
     public String extractAccessToken(String authorization){
         if(authorization == null){
             throw new JwtTokenException("Authorization 헤더가 없습니다. 관리자에게 문의해주세요.");
