@@ -25,7 +25,10 @@ import java.util.Map;
 @Component
 public class JwtProvider {
 
-    private final static String JWT_TYPE = "Bearer ";
+    private static final String JWT_TYPE = "Bearer ";
+    private static final String KEY_ID = "id";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_NAME = "name";
 
     public JwtProvider(@Value("${jwt.secret-key}") String secretKey){
         byte[] keyBytes = Base64.getEncoder().encode(secretKey.getBytes());
@@ -117,10 +120,19 @@ public class JwtProvider {
      */
     public Map<String, Object> generateClaims(UserEntity userEntity){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", userEntity.getId());
-        claims.put("email", userEntity.getEmail());
-        claims.put("name", userEntity.getName());
+        claims.put(KEY_ID, userEntity.getId());
+        claims.put(KEY_EMAIL, userEntity.getEmail());
+        claims.put(KEY_NAME, userEntity.getName());
 
         return claims;
+    }
+
+    /**
+     * login ID 추출
+     * @param claims - 클레임
+     * @return userId
+     */
+    public Long extractIdFromClaims(Claims claims){
+        return claims.get(KEY_ID, Long.class);
     }
 }
