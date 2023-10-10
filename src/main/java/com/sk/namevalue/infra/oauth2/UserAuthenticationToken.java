@@ -19,6 +19,7 @@ public class UserAuthenticationToken extends AbstractAuthenticationToken {
 
     public UserAuthenticationToken(Long userId, String email, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
+        super.setAuthenticated(true);
         this.principal = userId;
         this.credentials = email;
     }
