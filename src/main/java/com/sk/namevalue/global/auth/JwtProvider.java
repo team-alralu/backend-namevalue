@@ -37,7 +37,7 @@ public class JwtProvider {
 
     private final Key key;
 
-    private final static Long MINUTE = 1000L;
+    private final static Long MINUTE = 1000L*60;
 
     /**
      * 액세스 토큰 생성
