@@ -2,6 +2,7 @@ package com.sk.namevalue.global.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * title        : LoginController
@@ -11,10 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
+@RequestMapping("/view")
 public class ViewController {
 
     @GetMapping("/login")
     public String loginPage(){
-        return "/login/login";
+        return "/view/login";
+    }
+
+    @GetMapping("/test")
+    public String testPage(){
+        return "/view/test";
     }
 }
