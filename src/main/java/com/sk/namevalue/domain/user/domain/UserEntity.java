@@ -3,8 +3,10 @@ package com.sk.namevalue.domain.user.domain;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.model.enums.OAuthType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 import java.util.Map;
 
@@ -17,7 +19,7 @@ import java.util.Map;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_user")
 public class UserEntity extends BaseEntity {
 
@@ -34,6 +36,10 @@ public class UserEntity extends BaseEntity {
     @Column(name ="oauth_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private OAuthType oauthType;
+
+    @Comment("네임벨류 등록 횟수")
+    @Column(name = "name_value_add_cnt")
+    private long nameValueAddCnt;
 
     private UserEntity(String email, String name, OAuthType oauthType){
         this.email = email;
