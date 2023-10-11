@@ -1,6 +1,8 @@
 package com.sk.namevalue.infra.oauth2;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.namevalue.domain.model.enums.Token;
+import com.sk.namevalue.domain.token.dto.TokenDto;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
 import com.sk.namevalue.global.auth.JwtProvider;
@@ -10,12 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 /**
@@ -33,6 +36,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final JwtProvider jwtProvider;
 
+    private final ObjectMapper objectMapper;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
@@ -58,14 +62,14 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         Cookie cookie = HttpUtil.generateSecureCookie(Token.REFRESH_TOKEN.getKey(), refreshToken, Token.REFRESH_TOKEN.getMaxAge());
         response.addCookie(cookie);
-        responseRedirectUrl(request, response, accessToken);
-    }
 
-    private void responseRedirectUrl(HttpServletRequest request, HttpServletResponse response, String accessToken) throws IOException {
-        String targetUrl = UriComponentsBuilder.fromUriString("/login")
-                .queryParam(Token.ACCESS_TOKEN.getKey(),accessToken)
-                .build().toUriString();
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        String responseBody = objectMapper.writeValueAsString(TokenDto.from(accessToken));
 
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+        try(PrintWriter printWriter = response.getWriter()){
+            printWriter.write(responseBody);
+        }
+
+        log.info("인증이 완료되었습니다.");
     }
 }
