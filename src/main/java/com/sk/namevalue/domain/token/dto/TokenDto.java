@@ -13,7 +13,11 @@ import lombok.Getter;
 public class TokenDto {
     private final String accessToken;
 
-    public TokenDto(String accessToken){
+    private TokenDto(String accessToken){
         this.accessToken = accessToken;
+    }
+
+    public static TokenDto from(String accessToken){
+        return new TokenDto(accessToken);
     }
 }

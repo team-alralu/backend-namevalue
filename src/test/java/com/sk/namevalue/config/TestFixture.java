@@ -20,6 +20,6 @@ public interface TestFixture {
     String RENEW_ACCESS_TOKEN = "RENEW_ACCESS_TOKEN";
     Claims VALID_CLAIMS = new DefaultClaims(Map.of());
 
-    TokenDto RENEW_TOKEN_DTO = new TokenDto(RENEW_ACCESS_TOKEN);
+    TokenDto RENEW_TOKEN_DTO = TokenDto.from(RENEW_ACCESS_TOKEN);
 
 }

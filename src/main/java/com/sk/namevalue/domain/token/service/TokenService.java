@@ -38,7 +38,7 @@ public class TokenService {
         Long userId = jwtProvider.extractIdFromClaims(claims);
         redisService.save(userId, renewRefreshToken, Token.REFRESH_TOKEN.getMaxAge(), TimeUnit.MINUTES);
 
-        return new TokenDto(renewAccessToken);
+        return TokenDto.from(renewAccessToken);
     }
 
 }
