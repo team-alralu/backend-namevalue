@@ -1,5 +1,6 @@
 package com.sk.namevalue.global.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.global.auth.JwtProvider;
 import com.sk.namevalue.global.filter.JwtAuthorizationFilter;
@@ -30,6 +31,7 @@ public class SecurityConfig {
     private final UserRepository userRepository;
 
     private final JwtProvider jwtProvider;
+    private final ObjectMapper objectMapper;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -45,7 +47,7 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/login")
-                .successHandler(new CustomSuccessHandler(userRepository, jwtProvider))
+                .successHandler(new CustomSuccessHandler(userRepository, jwtProvider, objectMapper))
                 .failureHandler(new CustomFailureHandler())
                 .and()
                 .addFilterAfter(new JwtAuthorizationFilter(jwtProvider), OAuth2LoginAuthenticationFilter.class);
