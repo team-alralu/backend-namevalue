@@ -1,11 +1,11 @@
 package com.sk.namevalue.domain.token.service;
 
-import com.sk.namevalue.config.TestFixture;
 import com.sk.namevalue.domain.token.dto.TokenDto;
 import com.sk.namevalue.global.auth.JwtProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.sk.namevalue.config.TestFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
  * description  : TokenServiceTest
  */
 
-class TokenServiceTest implements TestFixture {
+class TokenServiceTest {
 
     private final JwtProvider jwtProvider = mock(JwtProvider.class);
     private final RedisService redisService = mock(RedisService.class);

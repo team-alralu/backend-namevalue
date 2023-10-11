@@ -1,6 +1,6 @@
 package com.sk.namevalue.domain.token.service;
 
-import com.sk.namevalue.config.TestFixture;
+
 import com.sk.namevalue.domain.model.enums.Token;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.sk.namevalue.config.TestFixture.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.verify;
  * date         : 2023-09-20
  * description  : RedisServiceTest
  */
-class RedisServiceTest implements TestFixture {
+class RedisServiceTest{
 
     private final RedisTemplate<Long, String> redisTemplate = mock(RedisTemplate.class);
     private final ValueOperations valueOperations = mock(ValueOperations.class);
