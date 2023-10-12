@@ -3,7 +3,9 @@ package com.sk.namevalue.domain.name.domain;
 import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * title        : 이름_흥미 엔티티
@@ -14,6 +16,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_person_name_favorite")
 public class PersonNameFavoriteEntity extends BaseEntity {
 
@@ -28,4 +31,13 @@ public class PersonNameFavoriteEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "favorite_id")
     private FavoriteEntity favorite;
+
+    private PersonNameFavoriteEntity(PersonNameEntity personName, FavoriteEntity favorite){
+        this.personName = personName;
+        this.favorite = favorite;
+    }
+
+    public static PersonNameFavoriteEntity of(PersonNameEntity personName, FavoriteEntity favorite){
+        return new PersonNameFavoriteEntity(personName, favorite);
+    }
 }
