@@ -52,11 +52,11 @@ public class PersonNameEntity extends BaseEntity {
     }
     /**
      * 이름에 대한 한줄평 추가
-     * @param content - 한줄평
+     * @param review - 한줄평
      * reviewList에 추가만 해주면 영속성 전이에 의해 ReviewEntity에 해당하는 테이블에도 데이터가 INSERT됨.
      */
-    public void addReview(String content){
-        ReviewEntity reviewEntity = ReviewEntity.createReviewEntity(this, content);
+    public void addReview(String review){
+        ReviewEntity reviewEntity = ReviewEntity.createReviewEntity(this, review);
         this.reviewList.add(reviewEntity);
     }
 
