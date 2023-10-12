@@ -68,7 +68,7 @@ public class PersonNameEntity extends BaseEntity {
      * animalList에 추가만 해주면 영속성 전이에 의해 PersonNameAnimalEntity에 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addAnimal(AnimalEntity animal){
-        PersonNameAnimalEntity personNameAnimalEntity = PersonNameAnimalEntity.createPersonNameAnimalEntity(this, animal);
+        PersonNameAnimalEntity personNameAnimalEntity = PersonNameAnimalEntity.of(this, animal);
         this.animalList.add(personNameAnimalEntity);
     }
 
@@ -78,7 +78,7 @@ public class PersonNameEntity extends BaseEntity {
      * personalityList에 추가만 해주면 영속성 전이에 의해 PersonNamePersonalityEntity 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addPersonality(PersonalityEntity personality){
-        PersonNamePersonalityEntity personNamePersonality = PersonNamePersonalityEntity.createPersonNamePersonalityEntity(this, personality);
+        PersonNamePersonalityEntity personNamePersonality = PersonNamePersonalityEntity.of(this, personality);
         this.personalityList.add(personNamePersonality);
     }
 

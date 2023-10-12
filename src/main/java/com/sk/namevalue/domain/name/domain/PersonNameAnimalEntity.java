@@ -31,7 +31,7 @@ public class PersonNameAnimalEntity extends BaseEntity {
     @JoinColumn(name = "animal_id", nullable = false)
     private AnimalEntity animal;
 
-    public static PersonNameAnimalEntity createPersonNameAnimalEntity(PersonNameEntity personName, AnimalEntity animal){
+    public static PersonNameAnimalEntity of(PersonNameEntity personName, AnimalEntity animal){
         return new PersonNameAnimalEntity(personName, animal);
     }
 

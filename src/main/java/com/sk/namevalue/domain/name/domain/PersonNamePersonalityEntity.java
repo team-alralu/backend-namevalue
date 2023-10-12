@@ -31,15 +31,10 @@ public class PersonNamePersonalityEntity extends BaseEntity {
     @JoinColumn(name = "personality_id", nullable = false)
     private PersonalityEntity personality;
 
-    public static PersonNamePersonalityEntity createPersonNamePersonalityEntity(
-            PersonNameEntity personName, PersonalityEntity personality){
+    public static PersonNamePersonalityEntity of(PersonNameEntity personName, PersonalityEntity personality){
         return new PersonNamePersonalityEntity(personName, personality);
     }
-    /**
-     * PersonNamePersonalityEntity 생성자
-     * @param personName - 사람 이름 엔티티
-     * @param personality - 성격 엔티티
-     */
+
     private PersonNamePersonalityEntity(PersonNameEntity personName, PersonalityEntity personality){
         this.personName = personName;
         this.personality = personality;
