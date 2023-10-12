@@ -33,6 +33,8 @@ public class PersonNameEntity extends BaseEntity {
     private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
+    private List<PersonNameFavoriteEntity> favoriteList = new ArrayList<>();
+    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<PersonNameAnimalEntity> animalList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
@@ -80,7 +82,13 @@ public class PersonNameEntity extends BaseEntity {
         this.personalityList.add(personNamePersonality);
     }
 
-    public static PersonNameEntity createPersonName(String personName){
-        return new PersonNameEntity(personName);
+    /**
+     * 이름에 대한 취미 추가
+     * @param favorite - 취미 엔티티
+     * favoriteList 추가만 해주면 영속성 전이에 의해 PersonNameFavoriteEntity 해당하는 테이블에도 데이터가 INSERT됨.
+     */
+    public void addFavorite(FavoriteEntity favorite){
+        PersonNameFavoriteEntity personNameFavorite = PersonNameFavoriteEntity.of(this, favorite);
+        this.favoriteList.add(personNameFavorite);
     }
 }
