@@ -1,9 +1,11 @@
 package com.sk.namevalue.domain.name.domain;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
+import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_person_name")
 public class PersonNameEntity extends BaseEntity {
 
@@ -36,6 +38,18 @@ public class PersonNameEntity extends BaseEntity {
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList = new ArrayList<>();
 
+    private PersonNameEntity(String personName){
+        this.personName = personName;
+    }
+
+    /**
+     * PersonNameEntity 정적 팩터리 메서드
+     * @param personName - 사람 이름
+     * @return PersonNameEntity
+     */
+    public static PersonNameEntity from(String personName){
+        return new PersonNameEntity(personName);
+    }
     /**
      * 이름에 대한 한줄평 추가
      * @param content - 한줄평
@@ -69,8 +83,4 @@ public class PersonNameEntity extends BaseEntity {
     public static PersonNameEntity createPersonName(String personName){
         return new PersonNameEntity(personName);
     }
-    private PersonNameEntity(String personName){
-        this.personName = personName;
-    }
-
 }
