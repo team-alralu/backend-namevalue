@@ -1,7 +1,6 @@
 package com.sk.namevalue.domain.user.dao.querydsl;
 
 import com.sk.namevalue.config.TestConfig;
-import com.sk.namevalue.config.TestFixture;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+
+import static com.sk.namevalue.config.TestFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -21,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @Import(TestConfig.class)
-class UserRepositoryImplTest implements TestFixture {
+class UserRepositoryImplTest{
 
     @Autowired
     private UserRepository userRepository;
