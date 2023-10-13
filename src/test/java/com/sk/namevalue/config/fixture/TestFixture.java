@@ -1,6 +1,6 @@
-package com.sk.namevalue.config;
+package com.sk.namevalue.config.fixture;
 
-import com.sk.namevalue.domain.name.domain.PersonNameEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameEntity;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.token.dto.TokenDto;
 import io.jsonwebtoken.Claims;
@@ -24,8 +24,9 @@ public class TestFixture {
     public static final String RENEW_ACCESS_TOKEN = "RENEW_ACCESS_TOKEN";
     public static final Claims VALID_CLAIMS = new DefaultClaims(Map.of());
     public static final TokenDto RENEW_TOKEN_DTO = TokenDto.from(RENEW_ACCESS_TOKEN);
-    public static final NameValueDto NAME_VALUE_DTO = NameValueDto.of("홍길동","성격이 온순하고 바른 사람입니다.",
+    public static final NameValueDto.Save NAME_VALUE_SAVE_DTO = NameValueDto.Save.of("홍길동","성격이 온순하고 바른 사람입니다.",
             List.of(1L, 2L, 3L), List.of(1L, 2L,3L), List.of(1L, 2L, 3L));
+    public static final NameValueDto.Select NAME_VALUE_SELECT_DTO = NameValueDto.Select.of("홍길동");
+    public static final List<NameValueDto.Response> NAME_VALUE_RESPONSE_DTO = List.of();
     public static final PersonNameEntity PERSON_NAME_ENTITY = PersonNameEntity.from("홍길동");
-
 }

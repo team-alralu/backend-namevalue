@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.sk.namevalue.config.TestFixture.*;
+import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
