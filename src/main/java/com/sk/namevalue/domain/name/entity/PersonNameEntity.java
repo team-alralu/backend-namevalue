@@ -1,9 +1,10 @@
-package com.sk.namevalue.domain.name.domain;
+package com.sk.namevalue.domain.name.entity;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
 import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
+import com.sk.namevalue.domain.review.entity.ReviewEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -58,7 +59,7 @@ public class PersonNameEntity extends BaseEntity {
      * reviewList에 추가만 해주면 영속성 전이에 의해 ReviewEntity에 해당하는 테이블에도 데이터가 INSERT됨.
      */
     public void addReview(String review){
-        ReviewEntity reviewEntity = ReviewEntity.createReviewEntity(this, review);
+        ReviewEntity reviewEntity = ReviewEntity.of(this, review);
         this.reviewList.add(reviewEntity);
     }
 

@@ -1,7 +1,7 @@
 package com.sk.namevalue.domain.favorite.domain;
 
 import com.sk.namevalue.domain.model.BaseEntity;
-import com.sk.namevalue.domain.name.domain.PersonNameFavoriteEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameFavoriteEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 

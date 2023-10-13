@@ -1,9 +1,15 @@
-package com.sk.namevalue.domain.name.domain;
+package com.sk.namevalue.domain.review.entity;
 
+import com.sk.namevalue.domain.like.entity.LikeEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * title        : 이름 한줄평 엔티티
@@ -14,13 +20,13 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
-@Table(name = "tbl_name_review")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "tbl_review")
 public class ReviewEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "name_review_id")
-    private Long id;
+    @Column(name = "review_id")
+    private Long reviewId;
 
     @ManyToOne
     @JoinColumn(name = "person_name")
@@ -29,7 +35,10 @@ public class ReviewEntity extends BaseEntity {
     @Column(name = "content", nullable = false, length = 100)
     private String content;
 
-    public static ReviewEntity createReviewEntity(PersonNameEntity personName, String content){
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
+    private List<LikeEntity> likeList = new ArrayList<>();
+
+    public static ReviewEntity of(PersonNameEntity personName, String content){
         return new ReviewEntity(personName,content);
     }
     private ReviewEntity(PersonNameEntity personName, String content){

@@ -1,4 +1,4 @@
-package com.sk.namevalue.domain.name.domain;
+package com.sk.namevalue.domain.name.entity;
 
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;

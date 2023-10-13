@@ -1,7 +1,7 @@
 package com.sk.namevalue.domain.animal.domain;
 
 import com.sk.namevalue.domain.model.BaseEntity;
-import com.sk.namevalue.domain.name.domain.PersonNameAnimalEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameAnimalEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
