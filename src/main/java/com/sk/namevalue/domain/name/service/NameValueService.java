@@ -4,11 +4,14 @@ import com.sk.namevalue.domain.animal.domain.AnimalEntity;
 import com.sk.namevalue.domain.animal.repository.AnimalRepository;
 import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
 import com.sk.namevalue.domain.favorite.repository.FavoriteRepository;
-import com.sk.namevalue.domain.name.domain.PersonNameEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameEntity;
+import com.sk.namevalue.domain.review.entity.ReviewEntity;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.repository.PersonNameRepository;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import com.sk.namevalue.domain.personality.repository.PersonalityRepository;
+import com.sk.namevalue.global.exception.DataNotFoundException;
+import com.sk.namevalue.global.exception.ErrorMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,7 +41,7 @@ public class NameValueService {
      * 네임벨류 저장
      * @param request - 요청 Dto
      */
-    public void save(NameValueDto request){
+    public void save(NameValueDto.Save request){
 
         String personName = request.getPersonName();
 
@@ -56,5 +59,20 @@ public class NameValueService {
         personNameRepository.save(personNameEntity);
 
         log.info("네임벨류 저장이 완료되었습니다.");
+    }
+
+    /**
+     * 네임벨류 조회
+     * @param request - 요청 Dto
+     */
+    public List<NameValueDto.Response> selectList(NameValueDto.Select request) {
+
+        PersonNameEntity findPersonNameEntity = personNameRepository.findById(request.getPersonName())
+                .orElseThrow(() -> new DataNotFoundException(ErrorMessage.PERSON_NAME_NOT_FOUND));
+
+        List<ReviewEntity> reviewEntityList = findPersonNameEntity.getReviewList();
+        // TODO : 로직 개발
+
+        return null;
     }
 }

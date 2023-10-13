@@ -4,10 +4,9 @@ import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.service.NameValueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * title        : Name 컨트롤러
@@ -29,7 +28,18 @@ public class NameValueController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(NameValueDto request){
+    public void save(@RequestBody NameValueDto.Save request){
         nameValueService.save(request);
+    }
+
+    /**
+     * 네임벨류 조회
+     * @param request - 요청 Dto
+     * @return - 네임벨류 리스트
+     */
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<NameValueDto.Response> selectList(@RequestBody NameValueDto.Select request){
+        return nameValueService.selectList(request);
     }
 }
