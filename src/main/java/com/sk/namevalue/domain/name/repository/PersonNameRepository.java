@@ -1,6 +1,6 @@
 package com.sk.namevalue.domain.name.repository;
 
-import com.sk.namevalue.domain.name.domain.PersonNameEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
