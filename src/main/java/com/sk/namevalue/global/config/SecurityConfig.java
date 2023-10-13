@@ -7,6 +7,7 @@ import com.sk.namevalue.global.filter.JwtAuthorizationFilter;
 import com.sk.namevalue.infra.oauth2.CustomFailureHandler;
 import com.sk.namevalue.infra.oauth2.CustomSuccessHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 /**
  * title        : Spring Security Config
@@ -29,18 +32,17 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserRepository userRepository;
-
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http
-                .authorizeHttpRequests((authz -> authz
-                        .requestMatchers("/api/**").hasRole("USER")
-                        .anyRequest().authenticated())
-                )
-                .headers().frameOptions().disable()
+                .authorizeHttpRequests()
+                    .requestMatchers("/h2-console").permitAll()
+                    .requestMatchers("/api/**").hasRole("USER")
+                .and()
+                .headers().frameOptions().sameOrigin()
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT 인증으로 인한 Session 미생성.
@@ -58,6 +60,9 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/view/login", "/error", "/error/*", "/img/**", "/favicon.ico");
+        return (web) -> web.ignoring()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .requestMatchers(PathRequest.toH2Console())
+                .requestMatchers(antMatcher("/view/login"),antMatcher("/error/**"));
     }
 }
