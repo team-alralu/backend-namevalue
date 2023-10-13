@@ -2,16 +2,19 @@ package com.sk.namevalue.domain.name.service;
 
 import com.sk.namevalue.domain.animal.repository.AnimalRepository;
 import com.sk.namevalue.domain.favorite.repository.FavoriteRepository;
-import com.sk.namevalue.domain.name.domain.PersonNameEntity;
+import com.sk.namevalue.domain.name.entity.PersonNameEntity;
+import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.repository.PersonNameRepository;
 import com.sk.namevalue.domain.personality.repository.PersonalityRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
-import static com.sk.namevalue.config.TestFixture.*;
+import static com.sk.namevalue.config.fixture.TestFixture.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -35,11 +38,22 @@ class NameValueServiceTest {
     @Test
     void saveWithValidDto() {
 
-        given(personNameRepository.findById(NAME_VALUE_DTO.getPersonName()))
+        given(personNameRepository.findById(NAME_VALUE_SAVE_DTO.getPersonName()))
                 .willReturn(Optional.of(PERSON_NAME_ENTITY));
 
-        nameValueService.save(NAME_VALUE_DTO);
+        nameValueService.save(NAME_VALUE_SAVE_DTO);
 
         verify(personNameRepository).save(any(PersonNameEntity.class));
+    }
+
+    @DisplayName("네임벨류 조회")
+    @Test
+    void selectList(){
+
+        List<NameValueDto.Response> result = nameValueService.selectList(NAME_VALUE_SELECT_DTO);
+        assertThat(result.get(0).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(0).getReview());
+        assertThat(result.get(0).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(0).getReview());
+        assertThat(result.get(1).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(1).getReview());
+        assertThat(result.get(1).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(1).getReview());
     }
 }

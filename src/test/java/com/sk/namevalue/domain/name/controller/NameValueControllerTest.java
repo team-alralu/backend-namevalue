@@ -16,9 +16,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.StandardCharsets;
 
-import static com.sk.namevalue.config.TestFixture.*;
+import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,16 +45,29 @@ class NameValueControllerTest {
         mockMvc = MockMvcFactory.of(webApplicationContext, StandardCharsets.UTF_8.name());
     }
 
-    @DisplayName("네임벨류 저장하기")
+    @DisplayName("네임벨류 저장")
     @Test
     void save() throws Exception {
         mockMvc.perform(
                 post("/api/name")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(NAME_VALUE_DTO)))
+                        .content(objectMapper.writeValueAsString(NAME_VALUE_SAVE_DTO)))
                 .andExpect(status().isCreated())
                 .andDo(print());
 
-        verify(nameValueService).save(any(NameValueDto.class));
+        verify(nameValueService).save(any(NameValueDto.Save.class));
+    }
+
+    @DisplayName("네임벨류 조회")
+    @Test
+    void selectList() throws Exception{
+        mockMvc.perform(
+                get("/api/name")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(NAME_VALUE_SELECT_DTO)))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        verify(nameValueService).selectList(any(NameValueDto.Select.class));
     }
 }
