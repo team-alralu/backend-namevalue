@@ -45,6 +45,30 @@ public class ExceptionControllerAdvice {
     }
 
     /**
+     * DataNotFoundException 예외 핸들러 메서드
+     * @param e - 예외
+     * @return - ErrorDto
+     */
+    @ExceptionHandler(DataNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDto dataNotFoundExceptionHandler(DataNotFoundException e){
+        log.error(e.getMessage());
+        return new ErrorDto(e.getMessage());
+    }
+
+    /**
+     * InvalidUserException 예외 핸들러 메서드
+     * @param e - 예외
+     * @return - ErrorDto
+     */
+    @ExceptionHandler(InvalidUserException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDto invalidUserExceptionHandler(InvalidUserException e){
+        log.error(e.getMessage());
+        return new ErrorDto(e.getMessage());
+    }
+
+    /**
      * Exception 예외 핸들러 메서드
      * @param e - 예외
      * @return - ErrorDto
