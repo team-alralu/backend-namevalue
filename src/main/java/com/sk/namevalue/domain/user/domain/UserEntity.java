@@ -47,6 +47,10 @@ public class UserEntity extends BaseEntity {
         this.oauthType = oauthType;
     }
 
+    public UserEntity of(String email, String name, OAuthType oauthType){
+        return new UserEntity(email, name, oauthType);
+    }
+
     public static UserEntity from(Map<String, Object> oAuth2Attributes){
         String email = (String) oAuth2Attributes.get("email");
         String name = (String) oAuth2Attributes.get("name");
