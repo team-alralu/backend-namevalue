@@ -5,7 +5,7 @@ import com.sk.namevalue.global.auth.JwtProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.sk.namevalue.config.TestFixture.*;
+import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
