@@ -10,9 +10,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-      show-sql: true
-      format_sql: true
     defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
   sql:
     init:
       data-locations: init.sql
