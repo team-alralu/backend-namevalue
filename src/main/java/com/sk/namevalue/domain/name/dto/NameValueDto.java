@@ -1,5 +1,9 @@
 package com.sk.namevalue.domain.name.dto;
 
+import com.sk.namevalue.domain.animal.dto.AnimalDto;
+import com.sk.namevalue.domain.favorite.dto.FavoriteDto;
+import com.sk.namevalue.domain.personality.dto.PersonalityDto;
+import com.sk.namevalue.domain.review.dto.ReviewDto;
 import lombok.Getter;
 
 import java.util.List;
@@ -37,7 +41,7 @@ public class NameValueDto {
 
     @Getter
     public static class Select{
-        private String personName;
+        private final String personName;
 
         private Select(String personName){
             this.personName = personName;
@@ -51,16 +55,24 @@ public class NameValueDto {
     @Getter
     public static class Response{
 
-        private Long reviewId;
-        private String review;
+        private final List<ReviewDto> topReviewList;
+        private final List<ReviewDto> reviewList;
+        private final AnimalDto representAnimal;
+        private final PersonalityDto representPersonality;
+        private final FavoriteDto representFavorite;
 
-        private Response(Long reviewId, String review){
-            this.reviewId = reviewId;
-            this.review = review;
+        private Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
+                , AnimalDto representAnimal, PersonalityDto representPersonality, FavoriteDto representFavorite){
+            this.reviewList = reviewList;
+            this.topReviewList = topReviewList;
+            this.representAnimal = representAnimal;
+            this.representPersonality = representPersonality;
+            this.representFavorite = representFavorite;
         }
 
-        public static Response of(Long reviewId, String review){
-            return new Response(reviewId, review);
+        public static Response of(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
+                , AnimalDto representAnimal, PersonalityDto representPersonality, FavoriteDto representFavorite){
+            return new Response(topReviewList, reviewList, representAnimal, representPersonality, representFavorite);
         }
     }
 }
