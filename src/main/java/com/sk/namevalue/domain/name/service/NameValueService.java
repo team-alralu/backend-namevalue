@@ -1,10 +1,13 @@
 package com.sk.namevalue.domain.name.service;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
+import com.sk.namevalue.domain.animal.dto.AnimalDto;
 import com.sk.namevalue.domain.animal.repository.AnimalRepository;
+import com.sk.namevalue.domain.likeability.repository.LikeabilityRepository;
+import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.entity.PersonNameEntity;
+import com.sk.namevalue.domain.personality.dto.PersonalityDto;
 import com.sk.namevalue.domain.review.dto.ReviewDto;
-import com.sk.namevalue.domain.review.entity.ReviewEntity;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.repository.PersonNameRepository;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
@@ -36,8 +39,10 @@ public class NameValueService {
     private final AnimalRepository animalRepository;
     private final PersonalityRepository personalityRepository;
     private final ReviewRepository reviewRepository;
+    private final LikeabilityRepository likeabilityRepository;
     /**
-     * 네임벨류 저장
+     * 이름 정보 저장
+     * 이름에 대한 호감도, 리뷰, 동물, 성격 데이터를 저장한다.
      * @param request - 요청 Dto
      */
     public void save(NameValueDto.Save request){
@@ -50,6 +55,7 @@ public class NameValueService {
         List<PersonalityEntity> personalityEntityList = personalityRepository.findAllById(request.getPersonalityList());
 
         personNameEntity.addReview(request.getReview());
+        personNameEntity.addLikeability(request.getLikeability());
         animalEntityList.forEach(personNameEntity::addAnimal);
         personalityEntityList.forEach(personNameEntity::addPersonality);
 
