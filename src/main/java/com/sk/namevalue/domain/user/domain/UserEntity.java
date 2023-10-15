@@ -1,6 +1,7 @@
 package com.sk.namevalue.domain.user.domain;
 
 import com.sk.namevalue.domain.model.BaseEntity;
+import com.sk.namevalue.domain.model.enums.MBTI;
 import com.sk.namevalue.domain.model.enums.OAuthType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -41,6 +42,11 @@ public class UserEntity extends BaseEntity {
     @Column(name = "name_value_add_cnt")
     private long nameValueAddCnt;
 
+    @Comment("mbti")
+    @Column(name = "mbti")
+    @Enumerated(EnumType.STRING)
+    private MBTI mbti;
+
     private UserEntity(String email, String name, OAuthType oauthType){
         this.email = email;
         this.name = name;
@@ -56,5 +62,9 @@ public class UserEntity extends BaseEntity {
         String name = (String) oAuth2Attributes.get("name");
         OAuthType oAuthType = OAuthType.valueOf(oAuth2Attributes.get("oauthType").toString());
         return new UserEntity(email, name, oAuthType);
+    }
+
+    public void updateMBTI(MBTI mbti){
+        this.mbti = mbti;
     }
 }
