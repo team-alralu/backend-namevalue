@@ -1,7 +1,7 @@
 package com.sk.namevalue.domain.name.entity;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
-import com.sk.namevalue.domain.favorite.domain.FavoriteEntity;
+import com.sk.namevalue.domain.likeability.entity.LikeabilityEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import com.sk.namevalue.domain.review.entity.ReviewEntity;
@@ -34,12 +34,13 @@ public class PersonNameEntity extends BaseEntity {
     private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
-    private List<PersonNameFavoriteEntity> favoriteList = new ArrayList<>();
-    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<PersonNameAnimalEntity> animalList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "personName", cascade = CascadeType.PERSIST)
+    private List<LikeabilityEntity> likeabilityList = new ArrayList<>();
 
     private PersonNameEntity(String personName){
         this.personName = personName;
@@ -84,12 +85,12 @@ public class PersonNameEntity extends BaseEntity {
     }
 
     /**
-     * 이름에 대한 취미 추가
-     * @param favorite - 취미 엔티티
-     * favoriteList 추가만 해주면 영속성 전이에 의해 PersonNameFavoriteEntity 해당하는 테이블에도 데이터가 INSERT됨.
+     * 이름에 대한 호감도 추가
+     * @param point - 호감도 엔티티
+     * likeabilityList에 추가만 해주면 영속성 전이에 의해 LikeabilityEntity 해당하는 테이블에도 데이터가 INSERT됨.
      */
-    public void addFavorite(FavoriteEntity favorite){
-        PersonNameFavoriteEntity personNameFavorite = PersonNameFavoriteEntity.of(this, favorite);
-        this.favoriteList.add(personNameFavorite);
+    public void addLikeability(int point){
+        LikeabilityEntity likeability = LikeabilityEntity.of(this, point);
+        this.likeabilityList.add(likeability);
     }
 }
