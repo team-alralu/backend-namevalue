@@ -1,12 +1,11 @@
 package com.sk.namevalue.domain.name.controller;
 
 import com.sk.namevalue.domain.name.dto.NameValueDto;
+import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.service.NameValueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * title        : Name 컨트롤러
@@ -23,7 +22,7 @@ public class NameValueController {
     private final NameValueService nameValueService;
 
     /**
-     * 네임벨류 저장
+     * 이름 정보 저장
      * @param request - 요청 Dto
      */
     @PostMapping
