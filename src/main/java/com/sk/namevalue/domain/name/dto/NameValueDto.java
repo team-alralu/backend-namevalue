@@ -1,7 +1,6 @@
 package com.sk.namevalue.domain.name.dto;
 
 import com.sk.namevalue.domain.animal.dto.AnimalDto;
-import com.sk.namevalue.domain.favorite.dto.FavoriteDto;
 import com.sk.namevalue.domain.personality.dto.PersonalityDto;
 import com.sk.namevalue.domain.review.dto.ReviewDto;
 import lombok.Getter;
@@ -59,20 +58,18 @@ public class NameValueDto {
         private final List<ReviewDto> reviewList;
         private final AnimalDto representAnimal;
         private final PersonalityDto representPersonality;
-        private final FavoriteDto representFavorite;
 
         private Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
-                , AnimalDto representAnimal, PersonalityDto representPersonality, FavoriteDto representFavorite){
+                , AnimalDto representAnimal, PersonalityDto representPersonality){
             this.reviewList = reviewList;
             this.topReviewList = topReviewList;
             this.representAnimal = representAnimal;
             this.representPersonality = representPersonality;
-            this.representFavorite = representFavorite;
         }
 
         public static Response of(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
-                , AnimalDto representAnimal, PersonalityDto representPersonality, FavoriteDto representFavorite){
-            return new Response(topReviewList, reviewList, representAnimal, representPersonality, representFavorite);
+                , AnimalDto representAnimal, PersonalityDto representPersonality){
+            return new Response(topReviewList, reviewList, representAnimal, representPersonality);
         }
     }
 }
