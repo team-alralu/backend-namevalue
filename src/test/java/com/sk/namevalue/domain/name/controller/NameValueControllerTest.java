@@ -20,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.StandardCharsets;
 
-import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willThrow;
@@ -92,6 +91,24 @@ class NameValueControllerTest extends TestFixture {
                 .andExpect(status().isOk())
                 .andDo(print());
 
-        verify(nameValueService).selectList(any(NameValueDto.Select.class));
+        verify(nameValueService).getNameInfo(any(NameValueDto.Select.class));
+    }
+
+    @DisplayName("이름 가치 조회")
+    @Test
+    void test() throws Exception {
+
+        given(nameValueService.getValue(any(ValueDto.Request.class)))
+                .willReturn(VALUE_RESPONSE_DTO);
+
+        mockMvc.perform(
+                get("/api/name/value")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(VALUE_REQUEST_DTO))
+        ).andExpect(status().isOk())
+                .andExpect(content().string(objectMapper.writeValueAsString(VALUE_RESPONSE_DTO)))
+                .andDo(print());
+
+        verify(nameValueService).getValue(any(ValueDto.Request.class));
     }
 }
