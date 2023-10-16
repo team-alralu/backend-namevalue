@@ -2,8 +2,6 @@ package com.sk.namevalue.domain.likeability.repository.querydsl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sk.namevalue.global.exception.DataNotFoundException;
-import com.sk.namevalue.global.exception.ErrorMessage;
 import lombok.RequiredArgsConstructor;
 
 import static com.sk.namevalue.domain.likeability.entity.QLikeabilityEntity.likeabilityEntity;
@@ -28,17 +26,17 @@ public class LikeabilityRepositoryImpl implements LikeabilityRepositoryCustom{
     @Override
     public int findAvgPointByPersonName(String personName) {
 
-        Double result = queryFactory.select(
+        // personName에 대한 값이 없을 시 평균 값으로 0을 반환한다. NPE가 발생하지 않음을 보장한다.
+        @SuppressWarnings("null")
+        int result =  queryFactory.select(
                 likeabilityEntity.point.avg())
                 .from(likeabilityEntity)
                 .where(
                         eqPersonName(personName))
-                .fetchOne();
+                .fetchOne()
+                .intValue();
 
-        if(result == null){
-            throw new DataNotFoundException(ErrorMessage.ZERO_LIKEABILITY);
-        }
-        return result.intValue();
+        return result;
     }
 
     private BooleanExpression eqPersonName(String personName){
