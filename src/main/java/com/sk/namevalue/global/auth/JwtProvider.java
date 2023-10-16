@@ -2,6 +2,7 @@ package com.sk.namevalue.global.auth;
 
 import com.sk.namevalue.domain.model.enums.Token;
 import com.sk.namevalue.domain.user.domain.UserEntity;
+import com.sk.namevalue.global.exception.ErrorMessage;
 import com.sk.namevalue.global.exception.JwtTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -87,15 +88,15 @@ public class JwtProvider {
                     .parseClaimsJws(token).getBody();
 
         } catch (ExpiredJwtException e) {
-            throw new JwtTokenException("토큰이 만료되었습니다. 다시 로그인하세요.");
+            throw new JwtTokenException(ErrorMessage.EXPIRED_JWT_TOKEN);
         } catch (UnsupportedJwtException e) {
-            throw new JwtTokenException("지원하지 않는 토큰입니다. 다시 로그인하세요.");
+            throw new JwtTokenException(ErrorMessage.UNSUPPORTED_JWT_TOKEN);
         } catch (MalformedJwtException e) {
-            throw new JwtTokenException("잘못된 형식의 토큰입니다. 다시 로그인하세요.");
+            throw new JwtTokenException(ErrorMessage.MALFORMED_JWT_TOKEN);
         } catch (SignatureException e) {
-            throw new JwtTokenException("위조된 요청입니다. 다시 로그인하세요.");
+            throw new JwtTokenException(ErrorMessage.FORGERY_SIGNATURE_JWT_TOKEN);
         } catch (IllegalArgumentException e) {
-            throw new JwtTokenException("토큰 파싱 중 에러가 발생했습니다. 관리자에게 문의해주세요.");
+            throw new JwtTokenException(ErrorMessage.FAIL_PARSING_JWT_TOKEN);
         }
     }
 
@@ -106,9 +107,9 @@ public class JwtProvider {
      */
     public String extractJwtToken(String authorization){
         if(authorization == null){
-            throw new JwtTokenException("Authorization 헤더가 없습니다. 관리자에게 문의해주세요.");
+            throw new JwtTokenException(ErrorMessage.NON_AUTHORIZATION_HEADER);
         } else if(!authorization.startsWith(JWT_TYPE)){
-            throw new JwtTokenException("잘못된 인증 헤더입니다. 다시 로그인해주세요");
+            throw new JwtTokenException(ErrorMessage.WRONG_AUTHORIZATION_HEADER);
         }
         return authorization.substring(JWT_TYPE.length());
     }
