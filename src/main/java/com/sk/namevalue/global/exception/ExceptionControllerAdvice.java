@@ -69,6 +69,19 @@ public class ExceptionControllerAdvice {
     }
 
     /**
+     * NotProcessException 예외 핸들러 메서드
+     * @param e - 예외
+     * @return - ErrorDto
+     */
+    @ExceptionHandler(NotProcessException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorDto notProcessExceptionHandler(NotProcessException e){
+        log.error(e.getMessage());
+        return new ErrorDto(e.getMessage());
+    }
+
+
+    /**
      * Exception 예외 핸들러 메서드
      * @param e - 예외
      * @return - ErrorDto
