@@ -6,6 +6,7 @@ import com.sk.namevalue.config.fixture.TestFixture;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.service.NameValueService;
+import com.sk.namevalue.global.exception.DataNotFoundException;
 import com.sk.namevalue.global.exception.ErrorMessage;
 import com.sk.namevalue.global.exception.InvalidUserException;
 import org.junit.jupiter.api.BeforeEach;
@@ -81,19 +82,36 @@ class NameValueControllerTest extends TestFixture {
         verify(nameValueService).save(VALID_USER_ID, any(NameValueDto.Save.class));
     }
 
-    @DisplayName("이름 정보 조회")
+    @DisplayName("유효 이름에 대한 이름 정보 조회")
     @Test
-    void getNameInfo() throws Exception{
+    void getNameInfoWithValidPersonName() throws Exception{
+
         mockMvc.perform(
                 get("/api/name")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(NAME_VALUE_SELECT_DTO)))
+                        .content(objectMapper.writeValueAsString(VALID_NAME_VALUE_SELECT_DTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
 
         verify(nameValueService).getNameInfo(any(NameValueDto.Select.class));
     }
 
+    @DisplayName("유효하지 않은 이름에 대한 이름 정보 조회")
+    @Test
+    void getNameInfoWithInvalidPersonName() throws Exception{
+
+        given(nameValueService.getNameInfo(any(NameValueDto.Select.class)))
+                .willThrow(new DataNotFoundException(ErrorMessage.PERSON_NAME_NOT_FOUND));
+
+        mockMvc.perform(
+                        get("/api/name")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(objectMapper.writeValueAsString(INVALID_NAME_VALUE_SELECT_DTO)))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+
+        verify(nameValueService).getNameInfo(any(NameValueDto.Select.class));
+    }
     @DisplayName("이름 가치 조회")
     @Test
     void test() throws Exception {
