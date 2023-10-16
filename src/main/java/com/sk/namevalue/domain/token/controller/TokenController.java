@@ -1,10 +1,10 @@
-package com.sk.namevalue.domain.token;
+package com.sk.namevalue.domain.token.controller;
 
-import com.sk.namevalue.domain.model.annotation.RefreshToken;
 import com.sk.namevalue.domain.token.dto.TokenDto;
 import com.sk.namevalue.domain.token.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +28,7 @@ public class TokenController {
      * @return TokenDto
      */
     @PostMapping
-    public TokenDto renewToken(@RefreshToken String refreshToken){
+    public TokenDto renewToken(@RequestHeader(value = "Authorization") String refreshToken){
         return tokenService.renewToken(refreshToken);
     }
 }
