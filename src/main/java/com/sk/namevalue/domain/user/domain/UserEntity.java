@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -31,9 +32,11 @@ public class UserEntity extends BaseEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Comment("이름")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Comment("OAuth2 타입")
     @Column(name ="oauth_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private OAuthType oauthType;
@@ -47,13 +50,21 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MBTI mbti;
 
+    @Comment("마지막 이름 등록 일자. [매크로 방지]")
+    @Column(name = "last_reg_date")
+    private LocalDateTime lastRegDate;
+
+    @Comment("필수정보 등록 여부")
+    @Column(name = "required_info_reg_flag")
+    private boolean requiredInfoRegFlag = false;
+
     private UserEntity(String email, String name, OAuthType oauthType){
         this.email = email;
         this.name = name;
         this.oauthType = oauthType;
     }
 
-    public UserEntity of(String email, String name, OAuthType oauthType){
+    public static UserEntity of(String email, String name, OAuthType oauthType){
         return new UserEntity(email, name, oauthType);
     }
 
@@ -64,7 +75,18 @@ public class UserEntity extends BaseEntity {
         return new UserEntity(email, name, oAuthType);
     }
 
+    /**
+     * MBTI 수정
+     * @param mbti - mbti
+     */
     public void updateMBTI(MBTI mbti){
         this.mbti = mbti;
+    }
+
+    /**
+     * 마지막 이름 정보 등록 날짜 수정
+     */
+    public void renewLastNameRegDate(){
+        this.lastRegDate = LocalDateTime.now();
     }
 }
