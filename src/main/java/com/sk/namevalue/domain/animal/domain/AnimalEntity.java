@@ -21,13 +21,10 @@ public class AnimalEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "animal_id")
-    private Long id;
+    private Long animalId;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "emoji", nullable = false)
-    private String emoji;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PersonNameAnimalEntity> animalEntityList;

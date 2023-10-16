@@ -13,15 +13,13 @@ import lombok.Getter;
 public class AnimalDto {
     private final Long animalId;
     private final String name;
-    private final String emoji;
 
-    private AnimalDto(Long animalId, String name, String emoji){
+    private AnimalDto(Long animalId, String name){
         this.animalId = animalId;
         this.name = name;
-        this.emoji = emoji;
     }
 
-    public AnimalDto of(Long animalId, String name, String emoji){
-        return new AnimalDto(animalId, name, emoji);
+    public AnimalDto of(Long animalId, String name){
+        return new AnimalDto(animalId, name);
     }
 }
