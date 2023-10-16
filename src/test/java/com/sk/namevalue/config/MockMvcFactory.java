@@ -21,6 +21,6 @@ public class MockMvcFactory {
     }
 
     private static CharacterEncodingFilter createCharacterEncodingFilter(String charset){
-        return new CharacterEncodingFilter(charset);
+        return new CharacterEncodingFilter(charset, true);
     }
 }
