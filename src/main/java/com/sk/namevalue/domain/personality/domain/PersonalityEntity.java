@@ -25,18 +25,10 @@ public class PersonalityEntity extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "emoji", nullable = false)
-    private String emoji;
-
-    @Column(name = "point", nullable = false)
-    private int point;
-
-    public static PersonalityEntity createPersonalityEntity(String name, String emoji, int point){
-        return new PersonalityEntity(name, emoji, point);
+    public static PersonalityEntity createPersonalityEntity(String name){
+        return new PersonalityEntity(name);
     }
-    private PersonalityEntity(String name, String emoji, int point){
+    private PersonalityEntity(String name){
         this.name = name;
-        this.emoji = emoji;
-        this.point = point;
     }
 }
