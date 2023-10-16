@@ -1,6 +1,5 @@
 package com.sk.namevalue.global.config;
 
-import com.sk.namevalue.global.auth.JwtArgumentResolver;
 import com.sk.namevalue.global.auth.LoginIdArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private final JwtArgumentResolver jwtArgumentResolver;
-
     private final LoginIdArgumentResolver loginIdArgumentResolver;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(jwtArgumentResolver);
         resolvers.add(loginIdArgumentResolver);
     }
 }
