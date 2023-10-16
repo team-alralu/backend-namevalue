@@ -2,10 +2,12 @@ package com.sk.namevalue.domain.token;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.namevalue.domain.model.enums.Token;
+import com.sk.namevalue.domain.token.controller.TokenController;
 import com.sk.namevalue.domain.token.service.TokenService;
 import com.sk.namevalue.global.exception.JwtTokenException;
 import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -53,8 +55,9 @@ class TokenControllerTest {
         given(tokenService.renewToken(INVALID_REFRESH_TOKEN)).willThrow(new JwtTokenException("토큰이 만료되었습니다. 다시 로그인하세요."));
     }
 
+    @DisplayName("유효 Refresh Token을 통한 AccessToken 갱신")
     @Test
-    void 토큰_갱신하기() throws Exception {
+    void renewAccessTokenWithValidRefreshToken() throws Exception {
         mockMvc.perform(
                 post("/api/token")
                         .cookie(new Cookie(Token.REFRESH_TOKEN.getKey(), VALID_REFRESH_TOKEN))
@@ -64,9 +67,10 @@ class TokenControllerTest {
                 .andDo(print());
     }
 
+    @DisplayName("유효하지 않은 Refresh Token을 통한 AccessToken 갱신")
     @ParameterizedTest
     @ValueSource(strings = { INVALID_REFRESH_TOKEN, ""})
-    void 유효하지_않은_REFRESH_TOKEN에_대한_토큰_갱신하기(String token) throws Exception {
+    void renewAccessTokenWithInalidRefreshToken(String token) throws Exception {
         mockMvc.perform(
                         post("/api/token")
                                 .cookie(new Cookie(Token.REFRESH_TOKEN.getKey(), token))
