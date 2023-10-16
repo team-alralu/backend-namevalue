@@ -1,6 +1,7 @@
 package com.sk.namevalue.domain.personality.repository;
 
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
+import com.sk.namevalue.domain.personality.repository.querydsl.PersonalityRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * date         : 2023-10-12
  * description  :
  */
-public interface PersonalityRepository extends JpaRepository<PersonalityEntity, Long> {
+public interface PersonalityRepository extends JpaRepository<PersonalityEntity, Long>, PersonalityRepositoryCustom {
+
 }
