@@ -99,7 +99,7 @@ public class NameValueService {
 
         AnimalDto representAnimal = animalRepository.findTopByPersonNameOrderByCount(personName);
 
-        return NameValueDto.Response.of(topReviewList, reviewList, representAnimal, representPersonality);
+        return new NameValueDto.Response(topReviewList, reviewList, representAnimal, representPersonality);
     }
 
     /**

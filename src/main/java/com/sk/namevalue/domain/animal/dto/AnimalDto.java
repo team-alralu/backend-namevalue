@@ -14,12 +14,9 @@ public class AnimalDto {
     private final Long animalId;
     private final String name;
 
-    private AnimalDto(Long animalId, String name){
+    public AnimalDto(Long animalId, String name){
         this.animalId = animalId;
         this.name = name;
     }
 
-    public AnimalDto of(Long animalId, String name){
-        return new AnimalDto(animalId, name);
-    }
 }

@@ -54,17 +54,12 @@ public class NameValueDto {
         private final AnimalDto representAnimal;
         private final PersonalityDto representPersonality;
 
-        private Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
+        public Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
                 , AnimalDto representAnimal, PersonalityDto representPersonality){
             this.reviewList = reviewList;
             this.topReviewList = topReviewList;
             this.representAnimal = representAnimal;
             this.representPersonality = representPersonality;
-        }
-
-        public static Response of(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
-                , AnimalDto representAnimal, PersonalityDto representPersonality){
-            return new Response(topReviewList, reviewList, representAnimal, representPersonality);
         }
     }
 }
