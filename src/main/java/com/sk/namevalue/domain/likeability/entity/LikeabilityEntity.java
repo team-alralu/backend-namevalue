@@ -33,4 +33,13 @@ public class LikeabilityEntity extends BaseEntity {
     @Comment("호감도 (0 ~ 100)")
     @Column(name = "point", nullable = false)
     private int point;
+
+    private LikeabilityEntity(PersonNameEntity personNameEntity, int point){
+        this.personName = personNameEntity;
+        this.point = point;
+    }
+
+    public static LikeabilityEntity of(PersonNameEntity personNameEntity, int point){
+        return new LikeabilityEntity(personNameEntity, point);
+    }
 }
