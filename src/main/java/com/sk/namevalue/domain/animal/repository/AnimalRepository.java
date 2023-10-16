@@ -1,6 +1,7 @@
 package com.sk.namevalue.domain.animal.repository;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
+import com.sk.namevalue.domain.animal.repository.querydsl.AnimalRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * date         : 2023-10-12
  * description  : AnimalRepository
  */
-public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
+public interface AnimalRepository extends JpaRepository<AnimalEntity, Long>, AnimalRepositoryCustom {
 }
