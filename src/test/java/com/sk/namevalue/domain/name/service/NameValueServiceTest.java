@@ -11,6 +11,7 @@ import com.sk.namevalue.domain.personality.repository.PersonalityRepository;
 import com.sk.namevalue.domain.review.repository.ReviewRepository;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
+import com.sk.namevalue.global.exception.DataNotFoundException;
 import com.sk.namevalue.global.exception.InvalidUserException;
 import com.sk.namevalue.global.exception.NotProcessException;
 import org.junit.jupiter.api.DisplayName;
@@ -49,8 +50,8 @@ class NameValueServiceTest {
         given(userRepository.findById(VALID_USER_ID))
                 .willReturn(Optional.of(VALID_USER_ENTITY));
 
-        given(personNameRepository.findById(NAME_VALUE_SAVE_DTO.getPersonName()))
-                .willReturn(Optional.of(PERSON_NAME_ENTITY));
+        given(personNameRepository.findById(VALID_PERSON_NAME))
+                .willReturn(Optional.of(VALID_PERSON_NAME_ENTITY));
 
         nameValueService.save(VALID_USER_ID, NAME_VALUE_SAVE_DTO);
 
@@ -85,14 +86,53 @@ class NameValueServiceTest {
         verify(personNameRepository, never()).save(any(PersonNameEntity.class));
     }
 
-    @DisplayName("네임벨류 조회")
+    @DisplayName("유효 이름에 대한 이름 정보 조회")
     @Test
-    void selectList(){
+    void getNameInfoWithValidPersonName(){
 
-        List<NameValueDto.Response> result = nameValueService.selectList(NAME_VALUE_SELECT_DTO);
-/*        assertThat(result.get(0).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(0).getReview());
-        assertThat(result.get(0).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(0).getReview());
-        assertThat(result.get(1).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(1).getReview());
-        assertThat(result.get(1).getReview()).isEqualTo(NAME_VALUE_RESPONSE_DTO.get(1).getReview());*/
+        given(personNameRepository.findById(VALID_PERSON_NAME))
+                .willReturn(Optional.of(VALID_PERSON_NAME_ENTITY));
+
+        given(reviewRepository.findTop5ByPersonNameOrderByLikeCountAndCreateDateDesc(VALID_PERSON_NAME))
+                .willReturn(TOP_REVIEW_DTO_LIST);
+
+        given(reviewRepository.findByPersonNameOrderByCreateDateDesc(VALID_PERSON_NAME))
+                .willReturn(REVIEW_DTO_LIST);
+
+        given(animalRepository.findTopByPersonNameOrderByCount(VALID_PERSON_NAME))
+                .willReturn(REPRESENT_ANIMAL_DTO);
+
+        given(personalityRepository.findTopByPersonNameOrderByCount(VALID_PERSON_NAME))
+                .willReturn(REPRESENT_PERSONALITY_DTO);
+
+        NameValueDto.Response result = nameValueService.getNameInfo(VALID_NAME_VALUE_SELECT_DTO);
+
+        assertThat(result.getTopReviewList()).isEqualTo(TOP_REVIEW_DTO_LIST);
+        assertThat(result.getReviewList()).isEqualTo(REVIEW_DTO_LIST);
+        assertThat(result.getRepresentAnimal()).isEqualTo(REPRESENT_ANIMAL_DTO);
+        assertThat(result.getRepresentPersonality()).isEqualTo(REPRESENT_PERSONALITY_DTO);
+    }
+
+    @DisplayName("유효하지 않은 이름에 대한 이름 정보 조회")
+    @Test
+    void getNameInfoWithInvalidPersonName(){
+
+        given(personNameRepository.findById(INVALID_PERSON_NAME))
+                .willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> nameValueService.getNameInfo(VALID_NAME_VALUE_SELECT_DTO))
+                .isInstanceOf(DataNotFoundException.class);
+    }
+
+    @DisplayName("가치 조회")
+    @Test
+    void getValue(){
+        given(likeabilityRepository.findAvgPointByPersonName("홍길동"))
+                .willReturn(4);
+        given(personNameRepository.findValueByLikeabilityPoint(4))
+                .willReturn(VALUE_RESPONSE_DTO);
+
+        ValueDto.Response result = nameValueService.getValue(VALUE_REQUEST_DTO);
+        assertThat(result).isEqualTo(VALUE_RESPONSE_DTO);
     }
 }
