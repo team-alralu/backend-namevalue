@@ -13,13 +13,18 @@ import com.sk.namevalue.domain.name.repository.PersonNameRepository;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import com.sk.namevalue.domain.personality.repository.PersonalityRepository;
 import com.sk.namevalue.domain.review.repository.ReviewRepository;
+import com.sk.namevalue.domain.user.dao.UserRepository;
+import com.sk.namevalue.domain.user.domain.UserEntity;
 import com.sk.namevalue.global.exception.DataNotFoundException;
 import com.sk.namevalue.global.exception.ErrorMessage;
+import com.sk.namevalue.global.exception.InvalidUserException;
+import com.sk.namevalue.global.exception.NotProcessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,18 +40,27 @@ import java.util.List;
 @Service
 public class NameValueService {
 
+    private final UserRepository userRepository;
     private final PersonNameRepository personNameRepository;
     private final AnimalRepository animalRepository;
     private final PersonalityRepository personalityRepository;
     private final ReviewRepository reviewRepository;
     private final LikeabilityRepository likeabilityRepository;
+
     /**
      * 이름 정보 저장
      * 이름에 대한 호감도, 리뷰, 동물, 성격 데이터를 저장한다.
+     * 저장 후 마지막 이름 정보 저장 일자를 갱신한다.
      * @param request - 요청 Dto
      */
-    public void save(NameValueDto.Save request){
+    public void save(Long userId, NameValueDto.Save request){
 
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidUserException(ErrorMessage.INVALID_USER));
+
+        if(!isRegPossible(userEntity.getLastRegDate())){
+            throw new NotProcessException(ErrorMessage.IMPOSSIBLE_SAVE_DATE);
+        }
         String personName = request.getPersonName();
 
         PersonNameEntity personNameEntity = PersonNameEntity.from(personName);
@@ -60,6 +74,7 @@ public class NameValueService {
         personalityEntityList.forEach(personNameEntity::addPersonality);
 
         personNameRepository.save(personNameEntity);
+        userEntity.renewLastNameRegDate();
 
         log.info("네임벨류 저장이 완료되었습니다.");
     }
@@ -87,8 +102,14 @@ public class NameValueService {
 
         // TODO : 4. 대표 취미 조회
 
-        // TODO : 5. 대표 동물 조회
 
-        return null;
+
+    /**
+     * @param lastRegDate - 마지막 이름 등록 날짜
+     * @return 이름 등록 가능 여부
+     */
+    private boolean isRegPossible(LocalDateTime lastRegDate){
+        return lastRegDate == null ||
+                lastRegDate.plusHours(1).isBefore(LocalDateTime.now());
     }
 }
