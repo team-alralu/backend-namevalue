@@ -80,27 +80,38 @@ public class NameValueService {
     }
 
     /**
-     * 네임벨류 조회
+     * 이름 정보 조회
      * @param request - 요청 Dto
+     * @return 이름 정보 Dto
      */
-    public List<NameValueDto.Response> selectList(NameValueDto.Select request) {
+    public NameValueDto.Response getNameInfo(NameValueDto.Select request) {
 
         String personName = request.getPersonName();
-        PersonNameEntity findPersonNameEntity = personNameRepository.findById(request.getPersonName())
+
+        personNameRepository.findById(request.getPersonName())
                 .orElseThrow(() -> new DataNotFoundException(ErrorMessage.PERSON_NAME_NOT_FOUND));
 
-        List<ReviewEntity> reviewEntityList = findPersonNameEntity.getReviewList();
-
-        // TODO : 1. 좋아요순 상위 5개 리뷰 조회
         List<ReviewDto> topReviewList = reviewRepository.findTop5ByPersonNameOrderByLikeCountAndCreateDateDesc(personName);
 
-        // TODO : 2. 최신 순 리뷰 조회
         List<ReviewDto> reviewList = reviewRepository.findByPersonNameOrderByCreateDateDesc(personName);
 
-        // TODO : 3. 대표 성격 조회
-        //PersonalityDto representPersonality =
+        PersonalityDto representPersonality = personalityRepository.findTopByPersonNameOrderByCount(personName);
 
-        // TODO : 4. 대표 취미 조회
+        AnimalDto representAnimal = animalRepository.findTopByPersonNameOrderByCount(personName);
+
+        return NameValueDto.Response.of(topReviewList, reviewList, representAnimal, representPersonality);
+    }
+
+    /**
+     * 가치 조회
+     * @param request - 요청 Dto
+     * @return 이름에 대한 가치 Dto
+     */
+    public ValueDto.Response getValue(ValueDto.Request request) {
+
+        int point = likeabilityRepository.findAvgPointByPersonName(request.getPersonName());
+        return personNameRepository.findValueByLikeabilityPoint(point);
+    }
 
 
 
