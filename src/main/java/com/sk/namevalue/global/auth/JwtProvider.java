@@ -104,7 +104,7 @@ public class JwtProvider {
      * @param authorization - Authorization Header
      * @return 완전한 JWT 토큰
      */
-    public String extractAccessToken(String authorization){
+    public String extractJwtToken(String authorization){
         if(authorization == null){
             throw new JwtTokenException("Authorization 헤더가 없습니다. 관리자에게 문의해주세요.");
         } else if(!authorization.startsWith(JWT_TYPE)){
