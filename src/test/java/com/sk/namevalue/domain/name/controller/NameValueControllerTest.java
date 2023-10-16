@@ -2,8 +2,12 @@ package com.sk.namevalue.domain.name.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.namevalue.config.MockMvcFactory;
+import com.sk.namevalue.config.fixture.TestFixture;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
+import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.service.NameValueService;
+import com.sk.namevalue.global.exception.ErrorMessage;
+import com.sk.namevalue.global.exception.InvalidUserException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +22,13 @@ import java.nio.charset.StandardCharsets;
 
 import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -33,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(NameValueController.class)
 @MockBean(JpaMetamodelMappingContext.class)
-class NameValueControllerTest {
+class NameValueControllerTest extends TestFixture {
 
     private MockMvc mockMvc;
     @MockBean
@@ -45,9 +52,9 @@ class NameValueControllerTest {
         mockMvc = MockMvcFactory.of(webApplicationContext, StandardCharsets.UTF_8.name());
     }
 
-    @DisplayName("네임벨류 저장")
+    @DisplayName("유효 사용자에 대한 이름 정보 저장")
     @Test
-    void save() throws Exception {
+    void saveWithValidUserId() throws Exception {
         mockMvc.perform(
                 post("/api/name")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -55,12 +62,29 @@ class NameValueControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(print());
 
-        verify(nameValueService).save(any(NameValueDto.Save.class));
+        verify(nameValueService).save(VALID_USER_ID,any(NameValueDto.Save.class));
     }
 
-    @DisplayName("네임벨류 조회")
+    @DisplayName("유효하지 않은 사용자에 대한 이름 정보 저장")
     @Test
-    void selectList() throws Exception{
+    void saveWithReg() throws Exception {
+
+        willThrow(new InvalidUserException(ErrorMessage.INVALID_USER))
+                .given(nameValueService).save(any(Long.class), any(NameValueDto.Save.class));
+
+        mockMvc.perform(
+                        post("/api/name")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(objectMapper.writeValueAsString(NAME_VALUE_SAVE_DTO)))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+
+        verify(nameValueService).save(VALID_USER_ID, any(NameValueDto.Save.class));
+    }
+
+    @DisplayName("이름 정보 조회")
+    @Test
+    void getNameInfo() throws Exception{
         mockMvc.perform(
                 get("/api/name")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
