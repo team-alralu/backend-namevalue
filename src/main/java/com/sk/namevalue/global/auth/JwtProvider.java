@@ -30,6 +30,7 @@ public class JwtProvider {
     private static final String KEY_ID = "id";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_NAME = "name";
+    private static final String KEY_REQUIRED_INFO_REG_FLAG = "required_info_reg_flag";
 
     public JwtProvider(@Value("${jwt.secret-key}") String secretKey){
         byte[] keyBytes = Base64.getEncoder().encode(secretKey.getBytes());
@@ -124,6 +125,7 @@ public class JwtProvider {
         claims.put(KEY_ID, userEntity.getId());
         claims.put(KEY_EMAIL, userEntity.getEmail());
         claims.put(KEY_NAME, userEntity.getName());
+        claims.put(KEY_REQUIRED_INFO_REG_FLAG, userEntity.isRequiredInfoRegFlag());
 
         return claims;
     }
