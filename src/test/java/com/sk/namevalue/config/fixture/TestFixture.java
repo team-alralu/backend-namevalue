@@ -1,6 +1,7 @@
 package com.sk.namevalue.config.fixture;
 
 import com.sk.namevalue.domain.animal.dto.AnimalDto;
+import com.sk.namevalue.domain.model.enums.MBTI;
 import com.sk.namevalue.domain.model.enums.OAuthType;
 import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.entity.PersonNameEntity;
@@ -9,6 +10,7 @@ import com.sk.namevalue.domain.personality.dto.PersonalityDto;
 import com.sk.namevalue.domain.review.dto.ReviewDto;
 import com.sk.namevalue.domain.token.dto.TokenDto;
 import com.sk.namevalue.domain.user.domain.UserEntity;
+import com.sk.namevalue.domain.user.dto.RequiredInfoDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.impl.DefaultClaims;
 
@@ -62,4 +64,5 @@ public class TestFixture {
 
     public static final PersonalityDto REPRESENT_PERSONALITY_DTO = new PersonalityDto(1L, "착한");
     public static final AnimalDto REPRESENT_ANIMAL_DTO = new AnimalDto(1L, "호랑이");
+    public static final RequiredInfoDto.Request REQUIRED_INFO_REQUEST_DTO = new RequiredInfoDto.Request(MBTI.ENFJ, NAME_VALUE_SAVE_DTO);
 }
