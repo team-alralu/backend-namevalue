@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
@@ -23,6 +24,7 @@ import java.util.Map;
  * description  : 인증 성공 후처리 클래스로 CustomOAuth2UserService 처리 후 호출된다.
  */
 
+@Component
 @RequiredArgsConstructor
 @Slf4j
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -34,7 +36,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final TokenService tokenService;
 
     @Value("${jwt.redirect-uri}")
-    private static String REDIRECT_URI;
+    private String REDIRECT_URI;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -58,7 +60,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         log.info(accessToken);
         log.info(refreshToken);
 
-        response.sendRedirect(REDIRECT_URI + "/accessToken="+accessToken+"&refreshToken="+refreshToken);
+        response.sendRedirect(REDIRECT_URI + "?accessToken="+accessToken+"&refreshToken="+refreshToken);
 
         log.info("인증이 완료되었습니다.");
     }
