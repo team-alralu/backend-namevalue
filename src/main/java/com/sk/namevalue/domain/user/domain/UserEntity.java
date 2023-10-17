@@ -89,4 +89,8 @@ public class UserEntity extends BaseEntity {
     public void renewLastNameRegDate(){
         this.lastRegDate = LocalDateTime.now();
     }
+
+    public void updateRequiredInfoRegFlag(boolean flag){
+        this.requiredInfoRegFlag = flag;
+    }
 }
