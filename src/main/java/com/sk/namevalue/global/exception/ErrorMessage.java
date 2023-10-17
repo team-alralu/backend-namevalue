@@ -23,7 +23,8 @@ public enum ErrorMessage {
     ,FORGERY_SIGNATURE_JWT_TOKEN("위조된 요청입니다. 다시 로그인하세요.")
     ,FAIL_PARSING_JWT_TOKEN("토큰 파싱 중 에러가 발생했습니다. 관리자에게 문의해주세요.")
     ,NON_AUTHORIZATION_HEADER("Authorization 헤더가 없습니다. 관리자에게 문의해주세요.")
-    ,WRONG_AUTHORIZATION_HEADER("잘못된 인증 헤더입니다. 다시 로그인해주세요");
+    ,WRONG_AUTHORIZATION_HEADER("잘못된 인증 헤더입니다. 다시 로그인 해주세요.")
+    ,ALREDAY_REGISTRATION_REQUIRED_INFO("필수 정보가 이미 등록된 유저입니다. 다시 로그인 해주세요.");
 
     private final String message;
 
