@@ -1,7 +1,5 @@
 package com.sk.namevalue.global.config;
 
-import com.sk.namevalue.domain.token.service.TokenService;
-import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.global.auth.JwtProvider;
 import com.sk.namevalue.global.filter.JwtAuthorizationFilter;
 import com.sk.namevalue.infra.oauth2.CustomFailureHandler;
@@ -31,9 +29,9 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
-    private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
-    private final TokenService tokenService;
+    private final CustomSuccessHandler customSuccessHandler;
+    private final CustomFailureHandler customFailureHandler;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -49,8 +47,8 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/login")
-                .successHandler(new CustomSuccessHandler(userRepository, jwtProvider, tokenService))
-                .failureHandler(new CustomFailureHandler())
+                .successHandler(customSuccessHandler)
+                .failureHandler(customFailureHandler)
                 .and()
                 .addFilterAfter(new JwtAuthorizationFilter(jwtProvider), OAuth2LoginAuthenticationFilter.class);
 
