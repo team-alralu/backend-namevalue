@@ -1,8 +1,8 @@
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, create_date) values (1L, 'gildong@naver.com', '홍길동', 'NAVER', 0, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, create_date) values (2L, 'test1@naver.com', '테스터1', 'NAVER', 0, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, create_date) values (3L, 'test2@naver.com', '테스터2', 'NAVER', 0, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, create_date) values (4L, 'test3@naver.com', '테스터3', 'NAVER', 0, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, create_date) values (5L, 'test4@naver.com', '테스터4', 'NAVER', 0, current_timestamp());
+insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (1L, 'gildong@naver.com', '홍길동', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (2L, 'test1@naver.com', '테스터1', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (3L, 'test2@naver.com', '테스터2', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (4L, 'test3@naver.com', '테스터3', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (5L, 'test4@naver.com', '테스터4', 'NAVER', 0, true, current_timestamp());
 
 insert into tbl_person_name(person_name, create_date) values ('홍길동',current_timestamp());
 
@@ -57,3 +57,12 @@ insert into tbl_likeability(likeability_id, person_name, point) values (4L, '홍
 insert into tbl_likeability(likeability_id, person_name, point) values (5L, '홍길동', 89);
 insert into tbl_likeability(likeability_id, person_name, point) values (6L, '홍길동', 89);
 insert into tbl_likeability(likeability_id, person_name, point) values (7L, '홍길동', 89);
+
+insert into tbl_personality(personality_id, name) values (1L, '성격1');
+insert into tbl_personality(personality_id, name) values (2L, '성격2');
+insert into tbl_personality(personality_id, name) values (3L, '성격3');
+
+insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (1L, '홍길동', 1L);
+insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (2L, '홍길동', 2L);
+insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (3L, '홍길동', 2L);
+insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (4L, '홍길동', 2L);
