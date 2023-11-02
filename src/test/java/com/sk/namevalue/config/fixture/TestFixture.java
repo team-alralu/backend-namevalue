@@ -27,7 +27,6 @@ public class TestFixture {
     public static final Long VALID_USER_ID = 1L;
     public static final UserEntity VALID_USER_ENTITY = UserEntity.of("valid@naver.com", "홍길동", OAuthType.NAVER);
     public static final Long INVALID_USER_ID = 100L;
-    public static final String VALID_EMAIL = "valid@naver.com";
     public static final String VALID_REFRESH_TOKEN = "VALID_REFRESH_TOKEN";
     public static final String RENEW_REFRESH_TOKEN = "RENEW_REFRESH_TOKEN";
     public static final String INVALID_REFRESH_TOKEN = "INVALID_REFRESH_TOKEN";
