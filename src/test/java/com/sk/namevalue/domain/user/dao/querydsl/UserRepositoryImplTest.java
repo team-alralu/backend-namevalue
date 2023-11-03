@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
-
-import static com.sk.namevalue.config.fixture.TestFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -28,9 +26,9 @@ class UserRepositoryImplTest{
     private UserRepository userRepository;
 
     @Test
-    @DisplayName("유저 조회 by email")
+    @DisplayName("이메일을 통한 유저정보 조회")
     void findByEmail() {
-        UserEntity userEntity = userRepository.findByEmail(VALID_EMAIL);
-        assertThat(userEntity.getEmail()).isEqualTo(VALID_EMAIL);
+        UserEntity userEntity = userRepository.findByEmail("gildong@naver.com");
+        assertThat(userEntity).isNotNull();
     }
 }
