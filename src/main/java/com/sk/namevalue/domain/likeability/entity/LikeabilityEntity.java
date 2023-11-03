@@ -2,11 +2,12 @@ package com.sk.namevalue.domain.likeability.entity;
 
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.name.entity.PersonNameEntity;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
+
+import javax.persistence.*;
 
 /**
  * title        : 호감도 엔티티
@@ -23,7 +24,8 @@ import org.hibernate.annotations.Comment;
 public class LikeabilityEntity extends BaseEntity {
 
     @Column(name = "likeability_id")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeabilityId;
 
     @ManyToOne

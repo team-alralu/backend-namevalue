@@ -1,8 +1,8 @@
 package com.sk.namevalue.global.util;
 
 import com.sk.namevalue.global.exception.HttpUtilException;
-import jakarta.servlet.http.Cookie;
 
+import javax.servlet.http.Cookie;
 import java.util.Arrays;
 
 /**

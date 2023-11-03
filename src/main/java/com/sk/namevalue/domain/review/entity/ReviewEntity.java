@@ -3,10 +3,11 @@ package com.sk.namevalue.domain.review.entity;
 import com.sk.namevalue.domain.like.entity.LikeEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.name.entity.PersonNameEntity;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ import java.util.List;
 @Table(name = "tbl_review")
 public class ReviewEntity extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewId;
 

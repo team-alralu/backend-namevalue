@@ -3,12 +3,12 @@ package com.sk.namevalue.domain.user.domain;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.model.enums.MBTI;
 import com.sk.namevalue.domain.model.enums.OAuthType;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Map;
 

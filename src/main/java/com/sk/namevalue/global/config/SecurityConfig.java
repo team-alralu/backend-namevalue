@@ -15,8 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 /**
  * title        : Spring Security Config
  * author       : sim
@@ -36,9 +34,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http
-                .authorizeHttpRequests()
-                    .requestMatchers("/h2-console").permitAll()
-                    .requestMatchers("/api/**").hasRole("USER")
+                .authorizeRequests()
+                    .antMatchers("/api/**").hasRole("USER")
+                    .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().sameOrigin()
                 .and()
@@ -61,6 +59,6 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .requestMatchers(PathRequest.toH2Console())
-                .requestMatchers(antMatcher("/view/login"),antMatcher("/error/**"));
+                .antMatchers("/view/login", "/error/**");
     }
 }

@@ -2,9 +2,12 @@ package com.sk.namevalue.domain.animal.domain;
 
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.name.entity.PersonNameAnimalEntity;
-import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +20,11 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "tbl_animal")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AnimalEntity extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "animal_id")
     private Long animalId;
 
@@ -27,5 +32,9 @@ public class AnimalEntity extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PersonNameAnimalEntity> animalEntityList;
+    private List<PersonNameAnimalEntity> animalEntityList = new ArrayList<>();
+
+    public AnimalEntity(String name){
+        this.name = name;
+    }
 }

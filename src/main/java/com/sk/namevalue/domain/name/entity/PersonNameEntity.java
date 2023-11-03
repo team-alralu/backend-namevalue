@@ -5,11 +5,11 @@ import com.sk.namevalue.domain.likeability.entity.LikeabilityEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
 import com.sk.namevalue.domain.review.entity.ReviewEntity;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

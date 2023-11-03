@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import static com.sk.namevalue.domain.name.entity.QPersonNameAnimalEntity.personNameAnimalEntity;
 
+
 /**
  * title        : AnimalRepositoryImpl
  * author       : sim

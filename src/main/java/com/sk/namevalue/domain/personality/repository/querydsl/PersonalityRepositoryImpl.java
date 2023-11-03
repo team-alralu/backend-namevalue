@@ -7,6 +7,7 @@ import com.sk.namevalue.domain.personality.dto.PersonalityDto;
 import lombok.RequiredArgsConstructor;
 
 import static com.sk.namevalue.domain.name.entity.QPersonNamePersonalityEntity.personNamePersonalityEntity;
+import static com.sk.namevalue.domain.personality.domain.QPersonalityEntity.personalityEntity;
 
 /**
  * title        : PersonalityRepositoryImpl
@@ -28,19 +29,22 @@ public class PersonalityRepositoryImpl implements PersonalityRepositoryCustom{
     @Override
     public PersonalityDto findTopByPersonNameOrderByCount(String personName) {
 
+        Long representPersonalityId = queryFactory.select(
+                        personNamePersonalityEntity.personality.personalityId)
+                .from(personNamePersonalityEntity)
+                .groupBy(personNamePersonalityEntity.personality.personalityId)
+                .orderBy(personNamePersonalityEntity.personality.personalityId.count().desc())
+                .fetchFirst();
+
         return queryFactory.select(
                 Projections.constructor(
                         PersonalityDto.class
-                        , personNamePersonalityEntity.personality.personalityId
-                        , personNamePersonalityEntity.personality.name
+                        , personalityEntity.personalityId
+                        , personalityEntity.name
                 ))
-                .from(
-                        personNamePersonalityEntity)
-                .where(
-                        eqPersonName(personName)
-                ).orderBy(
-                        personNamePersonalityEntity.personality.personalityId.count().desc()
-                ).fetchFirst();
+                .from(personalityEntity)
+                .where(personalityEntity.personalityId.eq(representPersonalityId))
+                .fetchOne();
     }
 
     private BooleanExpression eqPersonName(String personName){

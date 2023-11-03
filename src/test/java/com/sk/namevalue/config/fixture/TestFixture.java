@@ -36,6 +36,7 @@ public class TestFixture {
     public static final NameValueDto.Save NAME_VALUE_SAVE_DTO = new NameValueDto.Save("홍길동","성격이 온순하고 바른 사람입니다.",
             List.of(1L, 2L, 3L), List.of(1L, 2L,3L), 98);
     public static final String VALID_PERSON_NAME = "홍길동";
+    public static final Long REPRESENT_PERSONALITY_ID_OF_VALID_PERSON_NAME = 2L;
     public static final NameValueDto.Select VALID_NAME_VALUE_SELECT_DTO = new NameValueDto.Select(VALID_PERSON_NAME);
     public static final PersonNameEntity VALID_PERSON_NAME_ENTITY = PersonNameEntity.from(VALID_PERSON_NAME);
     public static final String INVALID_PERSON_NAME = "제네럴93";

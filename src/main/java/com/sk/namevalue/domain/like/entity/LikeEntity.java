@@ -3,10 +3,11 @@ package com.sk.namevalue.domain.like.entity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.review.entity.ReviewEntity;
 import com.sk.namevalue.domain.user.domain.UserEntity;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 /**
  * title        : 좋아요 엔티티

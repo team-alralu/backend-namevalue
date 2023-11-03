@@ -2,9 +2,10 @@ package com.sk.namevalue.domain.name.entity;
 
 import com.sk.namevalue.domain.animal.domain.AnimalEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 /**
  * title        : 이름_동물 엔티티
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_person_name_animal")
 public class PersonNameAnimalEntity extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "name_animal_id")
     private Long nameAnimalId;
 
