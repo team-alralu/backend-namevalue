@@ -1,0 +1,64 @@
+= NameValue API 명세서
+:sectnums:
+:toc: left
+:toclevels: 2
+:toc-title: 목차
+:source-highlighter: prettify
+
+Creater : sksim <tlatmsrud@naver.com>
+
+LastUpdateDate :
+
+== 사용자 정보
+
+=== 필수 정보 입력
+
+==== http Request Message
+include::{snippets}/regRequiredInfo/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/regRequiredInfo/http-response.adoc[]
+
+==== request body
+include::{snippets}/regRequiredInfo/request-fields.adoc[]
+
+== 이름 정보
+
+=== 이름 추가
+
+==== http Request Message
+include::{snippets}/save/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/save/http-response.adoc[]
+
+==== request body
+include::{snippets}/save/request-fields.adoc[]
+
+=== 이름 조회
+
+==== http Request Message
+include::{snippets}/getNameInfo/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/getNameInfo/http-response.adoc[]
+
+==== request body
+include::{snippets}/getNameInfo/request-fields.adoc[]
+
+==== response body
+include::{snippets}/getNameInfo/response-fields.adoc[]
+
+== 좋아요
+
+==== http Request Message
+include::{snippets}/like/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/like/http-response.adoc[]
+
+==== request body
+include::{snippets}/like/path-parameters.adoc[]
+
+
+

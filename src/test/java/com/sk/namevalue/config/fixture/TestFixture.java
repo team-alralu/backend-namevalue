@@ -27,7 +27,6 @@ public class TestFixture {
     public static final Long VALID_USER_ID = 1L;
     public static final UserEntity VALID_USER_ENTITY = UserEntity.of("valid@naver.com", "홍길동", OAuthType.NAVER);
     public static final Long INVALID_USER_ID = 100L;
-    public static final String VALID_EMAIL = "valid@naver.com";
     public static final String VALID_REFRESH_TOKEN = "VALID_REFRESH_TOKEN";
     public static final String RENEW_REFRESH_TOKEN = "RENEW_REFRESH_TOKEN";
     public static final String INVALID_REFRESH_TOKEN = "INVALID_REFRESH_TOKEN";
@@ -65,4 +64,5 @@ public class TestFixture {
     public static final PersonalityDto REPRESENT_PERSONALITY_DTO = new PersonalityDto(1L, "착한");
     public static final AnimalDto REPRESENT_ANIMAL_DTO = new AnimalDto(1L, "호랑이");
     public static final RequiredInfoDto.Request REQUIRED_INFO_REQUEST_DTO = new RequiredInfoDto.Request(MBTI.ENFJ, NAME_VALUE_SAVE_DTO);
+    public static final NameValueDto.Response NAME_VALUE_RESPONSE_DTO = new NameValueDto.Response(TOP_REVIEW_DTO_LIST,REVIEW_DTO_LIST, REPRESENT_ANIMAL_DTO,REPRESENT_PERSONALITY_DTO);
 }
