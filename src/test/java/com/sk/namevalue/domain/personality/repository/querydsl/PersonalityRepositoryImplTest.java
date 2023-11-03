@@ -29,8 +29,7 @@ class PersonalityRepositoryImplTest extends TestFixture {
     @DisplayName("사용자의 대표 성격 조회")
     @Test
     void findTopByPersonNameOrderByCount() {
-
         PersonalityDto result = personalityRepository.findTopByPersonNameOrderByCount(VALID_PERSON_NAME);
-        assertThat(result.getPersonalityId()).isEqualTo(1L);
+        assertThat(result.getPersonalityId()).isEqualTo(REPRESENT_PERSONALITY_ID_OF_VALID_PERSON_NAME);
     }
 }
