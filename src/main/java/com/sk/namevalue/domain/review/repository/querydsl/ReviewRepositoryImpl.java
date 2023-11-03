@@ -44,8 +44,8 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom{
                         eqPersonName(personName))
                 .orderBy(
                         reviewEntity.likeList.size().desc()
-                        ,reviewEntity.createDate.desc()
-                ).fetch();
+                        ,reviewEntity.createDate.desc())
+                .limit(5).fetch();
     }
 
     /**
