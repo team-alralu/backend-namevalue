@@ -35,7 +35,7 @@ include::{snippets}/save/http-response.adoc[]
 ==== request body
 include::{snippets}/save/request-fields.adoc[]
 
-=== 이름 조회
+=== 이름 정보 조회
 
 ==== http Request Message
 include::{snippets}/getNameInfo/http-request.adoc[]
@@ -51,6 +51,8 @@ include::{snippets}/getNameInfo/response-fields.adoc[]
 
 == 좋아요
 
+=== 좋아요 등록 및 취소
+
 ==== http Request Message
 include::{snippets}/like/http-request.adoc[]
 
@@ -60,5 +62,13 @@ include::{snippets}/like/http-response.adoc[]
 ==== request body
 include::{snippets}/like/path-parameters.adoc[]
 
+== 토큰
 
+=== 액세스 토큰 갱신
+
+==== http Request Message
+include::{snippets}/renewAccessToken/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/renewAccessToken/http-response.adoc[]
 
