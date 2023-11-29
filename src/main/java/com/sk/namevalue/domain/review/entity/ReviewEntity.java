@@ -15,7 +15,7 @@ import java.util.List;
  * title        : 이름 한줄평 엔티티
  * author       : sim
  * date         : 2023-08-29
- * description  : 이름 한줄평 엔티티
+ * description  : 이름 한줄평 엔티티. 리뷰는 익명이며 수정/삭제가 불가능한 구조입니다.
  */
 
 @Entity
