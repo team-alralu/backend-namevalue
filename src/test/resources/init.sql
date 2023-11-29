@@ -58,9 +58,22 @@ insert into tbl_likeability(likeability_id, person_name, point) values (5L, '홍
 insert into tbl_likeability(likeability_id, person_name, point) values (6L, '홍길동', 89);
 insert into tbl_likeability(likeability_id, person_name, point) values (7L, '홍길동', 89);
 
-insert into tbl_personality(personality_id, name) values (1L, '성격1');
-insert into tbl_personality(personality_id, name) values (2L, '성격2');
-insert into tbl_personality(personality_id, name) values (3L, '성격3');
+insert into tbl_personality(personality_id, name, create_date) values (1L, '다혈질인', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (2L, '걱정많은', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (3L, '재밌는', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (4L, '호기심많은', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (5L, '신중한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (6L, '이기적인', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (7L, '내성적인', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (8L, '눈치없는', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (9L, '소심한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (10L, '다정한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (11L, '순수한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (12L, '게으른', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (13L, '무관심한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (14L, '매력적인', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (15L, '친절한', current_timestamp());
+insert into tbl_personality(personality_id, name, create_date) values (16L, '너그러운', current_timestamp());
 
 insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (1L, '홍길동', 1L);
 insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (2L, '홍길동', 2L);
