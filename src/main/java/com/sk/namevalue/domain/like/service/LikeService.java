@@ -1,5 +1,6 @@
 package com.sk.namevalue.domain.like.service;
 
+import com.sk.namevalue.domain.like.dto.LikePayload;
 import com.sk.namevalue.domain.like.entity.LikeEntity;
 import com.sk.namevalue.domain.like.repository.LikeRepository;
 import com.sk.namevalue.domain.review.entity.ReviewEntity;
@@ -11,6 +12,7 @@ import com.sk.namevalue.global.exception.ErrorMessage;
 import com.sk.namevalue.global.exception.InvalidUserException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,7 @@ public class LikeService {
     private final LikeRepository likeRepository;
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
+    private final SimpMessagingTemplate messagingTemplate;
 
     /**
      * 좋아요 등록/삭제
@@ -42,6 +45,9 @@ public class LikeService {
         ReviewEntity reviewEntity = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new DataNotFoundException(ErrorMessage.INVALID_REVIEW));
 
+        String personName = reviewEntity.getPersonName().getPersonName();
+        int likeCnt = reviewEntity.getLikeList().size();
+
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidUserException(ErrorMessage.INVALID_USER));
 
@@ -50,9 +56,18 @@ public class LikeService {
         if(likeEntity == null){
             likeRepository.save(LikeEntity.of(userEntity, reviewEntity));
             log.info("save like - userId : "+userId+", reviewId : "+reviewId);
+            likeCnt++;
         }else{
             likeRepository.delete(likeEntity);
             log.info("delete like - userId : "+userId+", reviewId : "+reviewId);
+            likeCnt--;
         }
+
+        sendPayloadToSubscriber(personName, reviewId, likeCnt);
+
+    }
+
+    private void sendPayloadToSubscriber(String personName, Long reviewId, int likeCnt){
+        messagingTemplate.convertAndSend("/like-topic/"+personName, LikePayload.of(reviewId, likeCnt));
     }
 }
