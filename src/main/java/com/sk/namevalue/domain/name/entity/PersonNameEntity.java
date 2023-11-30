@@ -1,6 +1,5 @@
 package com.sk.namevalue.domain.name.entity;
 
-import com.sk.namevalue.domain.animal.domain.AnimalEntity;
 import com.sk.namevalue.domain.likeability.entity.LikeabilityEntity;
 import com.sk.namevalue.domain.model.BaseEntity;
 import com.sk.namevalue.domain.personality.domain.PersonalityEntity;
@@ -34,9 +33,6 @@ public class PersonNameEntity extends BaseEntity {
     private List<PersonNamePersonalityEntity> personalityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
-    private List<PersonNameAnimalEntity> animalList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "personName", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList = new ArrayList<>();
 
     @OneToMany(mappedBy = "personName", cascade = CascadeType.PERSIST)
@@ -62,16 +58,6 @@ public class PersonNameEntity extends BaseEntity {
     public void addReview(String review){
         ReviewEntity reviewEntity = ReviewEntity.of(this, review);
         this.reviewList.add(reviewEntity);
-    }
-
-    /**
-     * 이름에 대한 동물 추가
-     * @param animal - 동물 엔티티
-     * animalList에 추가만 해주면 영속성 전이에 의해 PersonNameAnimalEntity에 해당하는 테이블에도 데이터가 INSERT됨.
-     */
-    public void addAnimal(AnimalEntity animal){
-        PersonNameAnimalEntity personNameAnimalEntity = PersonNameAnimalEntity.of(this, animal);
-        this.animalList.add(personNameAnimalEntity);
     }
 
     /**

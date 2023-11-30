@@ -5,7 +5,6 @@ import com.sk.namevalue.config.MockMvcFactory;
 import com.sk.namevalue.config.TestUser;
 import com.sk.namevalue.config.TestUserType;
 import com.sk.namevalue.config.fixture.TestFixture;
-import com.sk.namevalue.domain.animal.dto.AnimalDto;
 import com.sk.namevalue.domain.name.dto.NameValueDto;
 import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.service.NameValueService;
@@ -130,9 +129,6 @@ class NameValueControllerTest extends TestFixture {
                                         ,fieldWithPath("reviewList[].reviewId").description("리뷰 ID").type(Long.class)
                                         ,fieldWithPath("reviewList[].review").description("리뷰 내용").type(String.class)
                                         ,fieldWithPath("reviewList[].likeCnt").description("좋아요 수").type(Integer.class)
-                                ,fieldWithPath("representAnimal").description("대표 동물").type(AnimalDto.class)
-                                        ,fieldWithPath("representAnimal.animalId").description("동물 ID").type(Long.class)
-                                        ,fieldWithPath("representAnimal.name").description("동물 명").type(String.class)
                                 ,fieldWithPath("representPersonality").description("대표 성격").type(PersonalityDto.class)
                                         ,fieldWithPath("representPersonality.personalityId").description("성격 ID").type(Long.class)
                                         ,fieldWithPath("representPersonality.name").description("성격 명").type(String.class)

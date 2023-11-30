@@ -1,8 +1,5 @@
 package com.sk.namevalue.domain.name.service;
 
-import com.sk.namevalue.domain.animal.domain.AnimalEntity;
-import com.sk.namevalue.domain.animal.dto.AnimalDto;
-import com.sk.namevalue.domain.animal.repository.AnimalRepository;
 import com.sk.namevalue.domain.likeability.repository.LikeabilityRepository;
 import com.sk.namevalue.domain.name.dto.ValueDto;
 import com.sk.namevalue.domain.name.entity.PersonNameEntity;
@@ -42,7 +39,6 @@ public class NameValueService {
 
     private final UserRepository userRepository;
     private final PersonNameRepository personNameRepository;
-    private final AnimalRepository animalRepository;
     private final PersonalityRepository personalityRepository;
     private final ReviewRepository reviewRepository;
     private final LikeabilityRepository likeabilityRepository;
@@ -65,12 +61,10 @@ public class NameValueService {
 
         PersonNameEntity personNameEntity = PersonNameEntity.from(personName);
 
-        List<AnimalEntity> animalEntityList = animalRepository.findAllById(request.getAnimalList());
         List<PersonalityEntity> personalityEntityList = personalityRepository.findAllById(request.getPersonalityList());
 
         personNameEntity.addReview(request.getReview());
         personNameEntity.addLikeability(request.getLikeability());
-        animalEntityList.forEach(personNameEntity::addAnimal);
         personalityEntityList.forEach(personNameEntity::addPersonality);
 
         personNameRepository.save(personNameEntity);
@@ -97,9 +91,7 @@ public class NameValueService {
 
         PersonalityDto representPersonality = personalityRepository.findTopByPersonNameOrderByCount(personName);
 
-        AnimalDto representAnimal = animalRepository.findTopByPersonNameOrderByCount(personName);
-
-        return new NameValueDto.Response(topReviewList, reviewList, representAnimal, representPersonality);
+        return new NameValueDto.Response(topReviewList, reviewList, representPersonality);
     }
 
     /**

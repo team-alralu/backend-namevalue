@@ -1,6 +1,5 @@
 package com.sk.namevalue.domain.name.dto;
 
-import com.sk.namevalue.domain.animal.dto.AnimalDto;
 import com.sk.namevalue.domain.personality.dto.PersonalityDto;
 import com.sk.namevalue.domain.review.dto.ReviewDto;
 import lombok.Getter;
@@ -51,14 +50,11 @@ public class NameValueDto {
 
         private final List<ReviewDto> topReviewList;
         private final List<ReviewDto> reviewList;
-        private final AnimalDto representAnimal;
         private final PersonalityDto representPersonality;
 
-        public Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList
-                , AnimalDto representAnimal, PersonalityDto representPersonality){
+        public Response(List<ReviewDto> topReviewList, List<ReviewDto> reviewList, PersonalityDto representPersonality){
             this.reviewList = reviewList;
             this.topReviewList = topReviewList;
-            this.representAnimal = representAnimal;
             this.representPersonality = representPersonality;
         }
     }

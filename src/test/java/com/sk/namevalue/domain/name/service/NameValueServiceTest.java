@@ -1,6 +1,5 @@
 package com.sk.namevalue.domain.name.service;
 
-import com.sk.namevalue.domain.animal.repository.AnimalRepository;
 import com.sk.namevalue.domain.likeability.repository.LikeabilityRepository;
 import com.sk.namevalue.domain.model.enums.OAuthType;
 import com.sk.namevalue.domain.name.dto.ValueDto;
@@ -37,11 +36,10 @@ class NameValueServiceTest {
 
     private final UserRepository userRepository = mock(UserRepository.class);
     private final PersonNameRepository personNameRepository = mock(PersonNameRepository.class);
-    private final AnimalRepository animalRepository = mock(AnimalRepository.class);
     private final PersonalityRepository personalityRepository = mock(PersonalityRepository.class);
     private final ReviewRepository reviewRepository = mock(ReviewRepository.class);
     private final LikeabilityRepository likeabilityRepository = mock(LikeabilityRepository.class);
-    private final NameValueService nameValueService = new NameValueService(userRepository, personNameRepository, animalRepository,  personalityRepository,reviewRepository, likeabilityRepository);
+    private final NameValueService nameValueService = new NameValueService(userRepository, personNameRepository, personalityRepository,reviewRepository, likeabilityRepository);
 
     @DisplayName("유효 사용자에 대한 이름 정보 저장")
     @Test
@@ -99,9 +97,6 @@ class NameValueServiceTest {
         given(reviewRepository.findByPersonNameOrderByCreateDateDesc(VALID_PERSON_NAME))
                 .willReturn(REVIEW_DTO_LIST);
 
-        given(animalRepository.findTopByPersonNameOrderByCount(VALID_PERSON_NAME))
-                .willReturn(REPRESENT_ANIMAL_DTO);
-
         given(personalityRepository.findTopByPersonNameOrderByCount(VALID_PERSON_NAME))
                 .willReturn(REPRESENT_PERSONALITY_DTO);
 
@@ -109,7 +104,6 @@ class NameValueServiceTest {
 
         assertThat(result.getTopReviewList()).isEqualTo(TOP_REVIEW_DTO_LIST);
         assertThat(result.getReviewList()).isEqualTo(REVIEW_DTO_LIST);
-        assertThat(result.getRepresentAnimal()).isEqualTo(REPRESENT_ANIMAL_DTO);
         assertThat(result.getRepresentPersonality()).isEqualTo(REPRESENT_PERSONALITY_DTO);
     }
 
