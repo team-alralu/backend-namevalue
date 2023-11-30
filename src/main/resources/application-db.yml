@@ -12,4 +12,9 @@ spring:
       host: localhost
       port: 6379
       password: ENC(5LX2YEsI8WNiejQPCqZpE9lpUehK3Ozv)
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
 
