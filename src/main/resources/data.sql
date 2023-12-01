@@ -1,27 +1,27 @@
-insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('gildong@naver.com', '홍길동', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test1@naver.com', '테스터1', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test2@naver.com', '테스터2', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test3@naver.com', '테스터3', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test4@naver.com', '테스터4', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('gildong@naver.com', '홍길동', 'NAVER', 0, false, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test1@naver.com', '테스터1', 'NAVER', 0, false, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test2@naver.com', '테스터2', 'NAVER', 0, false, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test3@naver.com', '테스터3', 'NAVER', 0, false, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test4@naver.com', '테스터4', 'NAVER', 0, false, current_timestamp());
 
 insert into tbl_person_name(person_name, create_date) values ('홍길동',current_timestamp());
 
-insert into tbl_review (review_id, person_name, content, create_date) values (1L, '홍길동','1번째 리뷰입니다.', '2023-01-09 09:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (2L, '홍길동','2번째 리뷰입니다.', '2023-01-09 10:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (3L, '홍길동','3번째 리뷰입니다.', '2023-01-09 11:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (4L, '홍길동','4번째 리뷰입니다.', '2023-01-09 12:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (5L, '홍길동','5번째 리뷰입니다.', '2023-01-09 13:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (6L, '홍길동','6번째 리뷰입니다.', '2023-01-09 14:00:00');
-insert into tbl_review (review_id, person_name, content, create_date) values (7L, '홍길동','7번째 리뷰입니다.', '2023-01-09 15:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','1번째 리뷰입니다.', '2023-01-09 09:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','2번째 리뷰입니다.', '2023-01-09 10:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','3번째 리뷰입니다.', '2023-01-09 11:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','4번째 리뷰입니다.', '2023-01-09 12:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','5번째 리뷰입니다.', '2023-01-09 13:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','6번째 리뷰입니다.', '2023-01-09 14:00:00');
+insert into tbl_review (person_name, content, create_date) values ('홍길동','7번째 리뷰입니다.', '2023-01-09 15:00:00');
 
-insert into tbl_like(like_id, review_id, user_id, create_date) values (1L, 1L, 1L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (2L, 2L, 1L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (3L, 2L, 2L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (4L, 2L, 3L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (5L, 2L, 4L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (6L, 2L, 1L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (7L, 5L, 1L, current_timestamp());
-insert into tbl_like(like_id, review_id, user_id, create_date) values (8L, 6L, 1L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (1L, 1L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (2L, 1L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (2L, 2L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (2L, 3L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (2L, 4L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (2L, 1L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (5L, 1L, current_timestamp());
+insert into tbl_like(review_id, user_id, create_date) values (6L, 1L, current_timestamp());
 
 insert into tbl_value(value_id, name, min, max) values (1L, '돌멩이',0, 5);
 insert into tbl_value(value_id, name, min, max) values (2L, '과자부스러기',6,8);
@@ -50,13 +50,13 @@ insert into tbl_value(value_id, name, min, max) values (25L, '밤하늘의 빛�
 insert into tbl_value(value_id, name, min, max) values (26L, '사막의 오아시스',91,95);
 insert into tbl_value(value_id, name, min, max) values (27L, '금은보화',96,100);
 
-insert into tbl_likeability(likeability_id, person_name, point) values (1L, '홍길동', 20);
-insert into tbl_likeability(likeability_id, person_name, point) values (2L, '홍길동', 89);
-insert into tbl_likeability(likeability_id, person_name, point) values (3L, '홍길동', 80);
-insert into tbl_likeability(likeability_id, person_name, point) values (4L, '홍길동', 89);
-insert into tbl_likeability(likeability_id, person_name, point) values (5L, '홍길동', 89);
-insert into tbl_likeability(likeability_id, person_name, point) values (6L, '홍길동', 89);
-insert into tbl_likeability(likeability_id, person_name, point) values (7L, '홍길동', 89);
+insert into tbl_likeability(person_name, point) values ('홍길동', 20);
+insert into tbl_likeability(person_name, point) values ('홍길동', 89);
+insert into tbl_likeability(person_name, point) values ('홍길동', 80);
+insert into tbl_likeability(person_name, point) values ('홍길동', 89);
+insert into tbl_likeability(person_name, point) values ('홍길동', 89);
+insert into tbl_likeability(person_name, point) values ('홍길동', 89);
+insert into tbl_likeability(person_name, point) values ('홍길동', 89);
 
 insert into tbl_personality(personality_id, name, path, create_date) values (1L, '다혈질인', '/images/personality/Volatile.png', current_timestamp());
 insert into tbl_personality(personality_id, name, path, create_date) values (2L, '걱정많은', '/images/personality/Worrywart.png', current_timestamp());
@@ -75,7 +75,7 @@ insert into tbl_personality(personality_id, name, path, create_date) values (14L
 insert into tbl_personality(personality_id, name, path, create_date) values (15L, '친절한', '/images/personality/Kind.png', current_timestamp());
 insert into tbl_personality(personality_id, name, path, create_date) values (16L, '너그러운', '/images/personality/Generous.png', current_timestamp());
 
-insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (1L, '홍길동', 1L);
-insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (2L, '홍길동', 2L);
-insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (3L, '홍길동', 2L);
-insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (4L, '홍길동', 2L);
+insert into tbl_person_name_personality(person_name, personality_id) values ('홍길동', 1L);
+insert into tbl_person_name_personality(person_name, personality_id) values ('홍길동', 2L);
+insert into tbl_person_name_personality(person_name, personality_id) values ('홍길동', 2L);
+insert into tbl_person_name_personality(person_name, personality_id) values ('홍길동', 2L);
