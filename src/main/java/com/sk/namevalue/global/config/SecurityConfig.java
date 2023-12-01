@@ -59,6 +59,6 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .requestMatchers(PathRequest.toH2Console())
-                .antMatchers("/view/login", "/error/**");
+                .antMatchers("/view/login", "/error/**", "/view/websocket", "/ws/**");
     }
 }
