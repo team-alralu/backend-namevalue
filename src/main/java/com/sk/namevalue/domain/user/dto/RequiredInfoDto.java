@@ -5,6 +5,8 @@ import com.sk.namevalue.domain.name.dto.NameValueDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * title        : 필수정보 Dto
  * author       : sim
@@ -16,6 +18,8 @@ public class RequiredInfoDto {
     @NoArgsConstructor
     @Getter
     public static class Request{
+
+        @NotNull(message = "유효하지 않은 MBTI 입니다. 다시 입력해주세요.")
         private MBTI mbti;
         private NameValueDto.Save nameInfo;
 
