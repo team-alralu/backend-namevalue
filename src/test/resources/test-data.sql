@@ -58,22 +58,23 @@ insert into tbl_likeability(likeability_id, person_name, point) values (5L, '홍
 insert into tbl_likeability(likeability_id, person_name, point) values (6L, '홍길동', 89);
 insert into tbl_likeability(likeability_id, person_name, point) values (7L, '홍길동', 89);
 
-insert into tbl_personality(personality_id, name, create_date) values (1L, '다혈질인', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (2L, '걱정많은', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (3L, '재밌는', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (4L, '호기심많은', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (5L, '신중한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (6L, '이기적인', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (7L, '내성적인', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (8L, '눈치없는', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (9L, '소심한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (10L, '다정한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (11L, '순수한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (12L, '게으른', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (13L, '무관심한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (14L, '매력적인', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (15L, '친절한', current_timestamp());
-insert into tbl_personality(personality_id, name, create_date) values (16L, '너그러운', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (1L, '다혈질인', '/images/personality/Volatile.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (2L, '걱정많은', '/images/personality/Worrywart.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (3L, '재밌는',  '/images/personality/Funny.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (4L, '호기심많은', '/images/personality/Curious/png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (5L, '신중한', '/images/personality/Discreet.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (6L, '이기적인', '/images/personality/Selfish.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (7L, '내성적인', '/images/personality/Introverted.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (8L, '눈치없는', '/images/personality/Tacless.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (9L, '소심한', '/images/personality/Timid.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (10L, '다정한', '/images/personality/Affectionate.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (11L, '순수한', '/images/personality/Innocent.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (12L, '게으른', '/images/personality/Lazy.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (13L, '무관심한', '/images/personality/Apathetic.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (14L, '매력적인', '/images/personality/Charming.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (15L, '친절한', '/images/personality/Kind.png', current_timestamp());
+insert into tbl_personality(personality_id, name, path, create_date) values (16L, '너그러운', '/images/personality/Generous.png', current_timestamp());
+
 
 insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (1L, '홍길동', 1L);
 insert into tbl_person_name_personality(name_personality_id, person_name, personality_id) values (2L, '홍길동', 2L);
