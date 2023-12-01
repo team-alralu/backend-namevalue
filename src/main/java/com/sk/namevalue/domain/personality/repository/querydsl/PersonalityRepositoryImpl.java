@@ -41,6 +41,7 @@ public class PersonalityRepositoryImpl implements PersonalityRepositoryCustom{
                         PersonalityDto.class
                         , personalityEntity.personalityId
                         , personalityEntity.name
+                        , personalityEntity.path
                 ))
                 .from(personalityEntity)
                 .where(personalityEntity.personalityId.eq(representPersonalityId))

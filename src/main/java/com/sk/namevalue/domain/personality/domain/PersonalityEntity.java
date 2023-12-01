@@ -30,14 +30,18 @@ public class PersonalityEntity extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "path", nullable = false)
+    private String path;
+
     @OneToMany(mappedBy = "personality", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PersonNamePersonalityEntity> personalityEntityList = new ArrayList<>();
 
-
-    public static PersonalityEntity createPersonalityEntity(String name){
-        return new PersonalityEntity(name);
-    }
-    private PersonalityEntity(String name){
+    private PersonalityEntity(Long personalityId, String name, String path){
+        this.personalityId = personalityId;
         this.name = name;
+        this.path = path;
+    }
+    public static PersonalityEntity of(Long personalityId, String name, String path){
+        return new PersonalityEntity(personalityId, name, path);
     }
 }
