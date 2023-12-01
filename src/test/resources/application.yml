@@ -18,4 +18,4 @@ spring:
 
   sql:
     init:
-      data-locations: init.sql
+      data-locations: test-data.sql
