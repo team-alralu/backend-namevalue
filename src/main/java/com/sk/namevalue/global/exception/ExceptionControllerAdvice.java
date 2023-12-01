@@ -28,6 +28,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(HttpUtilException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto httpUtilExceptionHandler(HttpUtilException e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(e.getMessage());
     }
@@ -40,6 +41,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(JwtTokenException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorDto jwtTokenExceptionHandler(JwtTokenException e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(e.getMessage());
     }
@@ -52,6 +54,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(DataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDto dataNotFoundExceptionHandler(DataNotFoundException e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(e.getMessage());
     }
@@ -64,6 +67,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(InvalidUserException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDto invalidUserExceptionHandler(InvalidUserException e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(e.getMessage());
     }
@@ -76,6 +80,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(NotProcessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto notProcessExceptionHandler(NotProcessException e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(e.getMessage());
     }
@@ -89,6 +94,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto jwtTokenExceptionHandler(Exception e){
+        e.printStackTrace();
         log.error(e.getMessage());
         return new ErrorDto(UNKNOWN_ERROR_MESSAGE);
     }
