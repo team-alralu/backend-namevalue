@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * title        : User Controller
  * author       : sim
@@ -28,7 +30,7 @@ public class UserController {
      */
     @PostMapping("/required")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void regRequiredInfo(@LoginId Long loginId, @RequestBody RequiredInfoDto.Request request){
+    public void regRequiredInfo(@LoginId Long loginId, @RequestBody @Valid RequiredInfoDto.Request request){
         userService.regRequiredInfo(loginId, request);
     }
 }
