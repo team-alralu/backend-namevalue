@@ -3,6 +3,7 @@ package com.sk.namevalue.global.exception;
 import com.sk.namevalue.global.dto.ErrorDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -85,7 +86,13 @@ public class ExceptionControllerAdvice {
         return new ErrorDto(e.getMessage());
     }
 
-
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto methodArgumentNotValidException(MethodArgumentNotValidException e){
+        e.printStackTrace();
+        log.error(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return new ErrorDto(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+    }
     /**
      * Exception 예외 핸들러 메서드
      * @param e - 예외
