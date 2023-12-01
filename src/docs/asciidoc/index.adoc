@@ -22,6 +22,19 @@ include::{snippets}/regRequiredInfo/http-response.adoc[]
 ==== request body
 include::{snippets}/regRequiredInfo/request-fields.adoc[]
 
+== 성격 정보
+
+=== 성격 캐릭터 리스트 조회
+
+==== http Request Message
+include::{snippets}/getPersonalityList/http-request.adoc[]
+
+==== http Response Message
+include::{snippets}/getPersonalityList/http-response.adoc[]
+
+==== response body
+include::{snippets}/getPersonalityList/response-fields.adoc[]
+
 == 이름 정보
 
 === 이름 추가
