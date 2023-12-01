@@ -21,14 +21,12 @@ public class NameValueDto {
     public static class Save{
         private final String personName;
         private final String review;
-        private final List<Long> animalList;
         private final List<Long> personalityList;
         private final int likeability;
 
-        public Save(String personName, String review, List<Long> animalList, List<Long> personalityList, int likeability){
+        public Save(String personName, String review, List<Long> personalityList, int likeability){
             this.personName = personName;
             this.review = review;
-            this.animalList = animalList;
             this.personalityList = personalityList;
             this.likeability = likeability;
         }

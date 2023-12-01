@@ -71,7 +71,6 @@ class UserControllerTest extends TestFixture {
                                 fieldWithPath("nameInfo").description("이름 정보").type(Object.class)
                                         ,fieldWithPath("nameInfo.personName").description("이름").type(String.class)
                                         ,fieldWithPath("nameInfo.review").description("리뷰").type(String.class)
-                                        ,fieldWithPath("nameInfo.animalList").description("동물 리스트").type(Integer[].class)
                                         ,fieldWithPath("nameInfo.personalityList").description("성격 리스트").type(Integer[].class)
                                         ,fieldWithPath("nameInfo.likeability").description("호감도").type(Integer.class)
                                         ,fieldWithPath("mbti").description("MBTI").type(String.class)

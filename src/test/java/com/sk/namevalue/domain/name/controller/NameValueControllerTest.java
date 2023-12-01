@@ -79,7 +79,6 @@ class NameValueControllerTest extends TestFixture {
                         ,requestFields(
                                 fieldWithPath("personName").description("이름").type(String.class)
                                         ,fieldWithPath("review").description("리뷰").type(String.class)
-                                        ,fieldWithPath("animalList").description("동물 리스트 (1개)").type(Integer[].class)
                                         ,fieldWithPath("personalityList").description("성격 리스트 (최대 3개)").type(Integer[].class)
                                         ,fieldWithPath("likeability").description("호감도").type(Integer.class)
                                 )));
@@ -132,6 +131,7 @@ class NameValueControllerTest extends TestFixture {
                                 ,fieldWithPath("representPersonality").description("대표 성격").type(PersonalityDto.class)
                                         ,fieldWithPath("representPersonality.personalityId").description("성격 ID").type(Long.class)
                                         ,fieldWithPath("representPersonality.name").description("성격 명").type(String.class)
+                                        ,fieldWithPath("representPersonality.path").description("경로").type(String.class)
                                 )));
 
         verify(nameValueService).getNameInfo(any(NameValueDto.Select.class));
