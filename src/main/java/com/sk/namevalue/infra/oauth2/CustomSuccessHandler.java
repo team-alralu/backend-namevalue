@@ -7,14 +7,17 @@ import com.sk.namevalue.global.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 /**
@@ -38,30 +41,39 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     @Value("${jwt.redirect-uri}")
     private String REDIRECT_URI;
 
+    private static final String REDIS_CONNECTION_ERROR = "Redis Connection Error!";
+    @Transactional
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
-        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
-        Map<String,Object> attributes = oAuth2User.getAttributes();
-        String email = (String) attributes.get("email");
-        UserEntity userEntity = userRepository.findByEmail(email);
+        try{
+            OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+            Map<String,Object> attributes = oAuth2User.getAttributes();
+            String email = (String) attributes.get("email");
+            UserEntity userEntity = userRepository.findByEmail(email);
 
-        if(userEntity == null){
-            log.info(email+" 계정에 대한 신규 유저를 생성합니다.");
-            userEntity = UserEntity.from(attributes);
-            userRepository.save(userEntity);
+            if(userEntity == null){
+                log.info(email+" 계정에 대한 신규 유저를 생성합니다.");
+                userEntity = UserEntity.from(attributes);
+                userRepository.save(userEntity);
+            }
+
+            Map<String, Object> claims = jwtProvider.generateClaims(userEntity);
+            String accessToken = jwtProvider.generateAccessToken(claims);
+            String refreshToken = jwtProvider.generateRefreshToken(claims);
+            tokenService.saveRefreshToken( userEntity.getId(), refreshToken);
+            log.info(accessToken);
+            log.info(refreshToken);
+
+            response.sendRedirect(REDIRECT_URI + "?accessToken="+accessToken+"&refreshToken="+refreshToken);
+
+            log.info("인증이 완료되었습니다.");
+        }catch (RedisConnectionFailureException e){
+            PrintWriter printWriter = response.getWriter();
+            printWriter.write(REDIS_CONNECTION_ERROR);
+            throw new RedisConnectionFailureException(REDIS_CONNECTION_ERROR);
         }
 
-        Map<String, Object> claims = jwtProvider.generateClaims(userEntity);
-        String accessToken = jwtProvider.generateAccessToken(claims);
-        String refreshToken = jwtProvider.generateRefreshToken(claims);
-        tokenService.saveRefreshToken( userEntity.getId(), refreshToken);
-        log.info(accessToken);
-        log.info(refreshToken);
-
-        response.sendRedirect(REDIRECT_URI + "?accessToken="+accessToken+"&refreshToken="+refreshToken);
-
-        log.info("인증이 완료되었습니다.");
     }
 }
