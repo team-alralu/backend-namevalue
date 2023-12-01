@@ -1,8 +1,8 @@
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (1L, 'gildong@naver.com', '홍길동', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (2L, 'test1@naver.com', '테스터1', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (3L, 'test2@naver.com', '테스터2', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (4L, 'test3@naver.com', '테스터3', 'NAVER', 0, true, current_timestamp());
-insert into tbl_user(user_id, email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values (5L, 'test4@naver.com', '테스터4', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('gildong@naver.com', '홍길동', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test1@naver.com', '테스터1', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test2@naver.com', '테스터2', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test3@naver.com', '테스터3', 'NAVER', 0, true, current_timestamp());
+insert into tbl_user(email, name, oauth_type, name_value_add_cnt, required_info_reg_flag, create_date) values ('test4@naver.com', '테스터4', 'NAVER', 0, true, current_timestamp());
 
 insert into tbl_person_name(person_name, create_date) values ('홍길동',current_timestamp());
 
