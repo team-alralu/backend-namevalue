@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script>
+
+
+        // 웹소켓 Connect
+        $(document).ready(function(){
+            let socket = new SockJS("http://192.168.35.123:1111/ws");
+            let stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function(frame){
+                console.log("Connected : "+frame);
+                stompClient.subscribe("/name-topic/홍길동", function(response){
+                    console.log("receive message !! : "+response);
+                })
+            });
+        })
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

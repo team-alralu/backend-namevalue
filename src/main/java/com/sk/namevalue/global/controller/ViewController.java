@@ -24,4 +24,9 @@ public class ViewController {
     public String testPage(){
         return "/view/test";
     }
+
+    @GetMapping("/websocket")
+    public String socketPage(){
+        return "/view/like";
+    }
 }
