@@ -8,6 +8,8 @@ import com.sk.namevalue.domain.review.entity.ReviewEntity;
 import com.sk.namevalue.domain.review.repository.ReviewRepository;
 import com.sk.namevalue.domain.user.dao.UserRepository;
 import com.sk.namevalue.domain.user.domain.UserEntity;
+import com.sk.namevalue.global.exception.DataNotFoundException;
+import com.sk.namevalue.global.exception.InvalidUserException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -15,6 +17,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -72,4 +75,28 @@ class LikeServiceTest extends TestFixture {
         verify(likeRepository).delete(any(LikeEntity.class));
         verify(messagingTemplate).convertAndSend(any(String.class), any(LikePayload.class));
     }
+
+    @Test
+    @DisplayName("존재하지 않는 리뷰에 대한 좋아요 추가 및 삭제")
+    void likeWithInvalidReview(){
+        given(reviewRepository.findById(any(Long.class))).willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> likeService.like(1L, 1L))
+                .isInstanceOf(DataNotFoundException.class);
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 유저의 좋아요 추가 및 삭제")
+    void likeWithInvalidUser(){
+        ReviewEntity reviewEntity = ReviewEntity.of(VALID_PERSON_NAME_ENTITY, "홍길동님은 밥을 너무 쿰척쿰척 먹습니다.");
+
+        given(reviewRepository.findById(any(Long.class))).willReturn(Optional.of(reviewEntity));
+
+        given(userRepository.findById(any(Long.class))).willReturn(
+                Optional.empty());
+
+        assertThatThrownBy(() -> likeService.like(1L, 1L))
+                .isInstanceOf(InvalidUserException.class);
+    }
+
 }
