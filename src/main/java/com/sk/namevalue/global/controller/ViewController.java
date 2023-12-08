@@ -17,16 +17,16 @@ public class ViewController {
 
     @GetMapping("/login")
     public String loginPage(){
-        return "/view/login";
+        return "view/login";
     }
 
     @GetMapping("/test")
     public String testPage(){
-        return "/view/test";
+        return "view/test";
     }
 
     @GetMapping("/websocket")
     public String socketPage(){
-        return "/view/like";
+        return "view/like";
     }
 }
