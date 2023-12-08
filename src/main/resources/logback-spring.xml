@@ -9,19 +9,19 @@
         </appender>
 
         <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file> /home/sksim/namevalue/logs/namevalue.log</file>
+            <file> logs/namevalue.log</file>
             <encoder>
                 <pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5level] [%thread] %logger %msg%n</pattern>
             </encoder>
             <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>/home/sksim/namevalue/logs/namevalue.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                <fileNamePattern>logs/namevalue.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
                 <maxHistory>7</maxHistory>
                 <totalSizeCap>50MB</totalSizeCap>
             </rollingPolicy>
         </appender>
 
         <appender name="errorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file> /home/sksim/namevalue/logs/namevalue_error.log</file>
+            <file> logs/namevalue_error.log</file>
             <filter class="ch.qos.logback.classic.filter.LevelFilter">
                 <level>ERROR</level>
                 <onMismatch>DENY</onMismatch>
@@ -30,7 +30,7 @@
                 <pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5level] [%thread] %logger %msg%n</pattern>
             </encoder>
             <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>/home/sksim/namevalue/logs/namevalue_error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                <fileNamePattern>logs/namevalue_error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
                 <maxHistory>7</maxHistory>
                 <totalSizeCap>50MB</totalSizeCap>
             </rollingPolicy>
