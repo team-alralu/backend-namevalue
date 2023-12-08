@@ -7,7 +7,7 @@ echo "$CURRENT_PID"
 if [ -z $CURRENT_PID ]; then
         echo "> no running app."
 else
-        echo "> kill -9 $CURRENT_PID”
+        echo "> kill -9 $CURRENT_PID"
         kill -9 $CURRENT_PID
         sleep 3
 fi
