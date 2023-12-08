@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "> now running app find!"
-CURRENT_PID=$(pgrep -f backend-namevalue)
+CURRENT_PID=$(pgrep -f namevalue)
 
 echo "$CURRENT_PID"
 if [ -z $CURRENT_PID ]; then
@@ -14,7 +14,7 @@ fi
 
 echo "> new app deploy"
 
-JAR_NAME=$(ls |grep 'backend-namevalue' | tail -n 1)
+JAR_NAME=$(ls |grep 'namevalue' | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
 
 echo "> run java"
