@@ -1,3 +1,3 @@
 jwt:
   secret-key: ENC(sJDcRsFF7D5xR15emIw80jMwbhnkpjDshfARgEdekEEyoxLU1vqJgR2Vu2jaK1Swwo0zggO8Qo3Pb2XY0dggYg==)
-  redirect-uri: http://localhost:1111/view/login
+  redirect-uri: http://localhost:3000/auth
