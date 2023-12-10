@@ -17,12 +17,12 @@ public class ErrorController {
 
     @GetMapping("/404")
     public String page404(){
-        return "/error/404";
+        return "error/404";
     }
 
     @GetMapping("/401")
     public String page401(){
-        return "/error/401";
+        return "error/401";
     }
 
 }
