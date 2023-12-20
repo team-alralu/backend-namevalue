@@ -85,3 +85,41 @@ include::{snippets}/renewAccessToken/http-request.adoc[]
 ==== http Response Message
 include::{snippets}/renewAccessToken/http-response.adoc[]
 
+== HTTP 상태 코드
+
+=== 성공
+[cols=2*]
+|===
+|코드
+|내용
+
+|200
+|정상 처리
+
+|201
+|자원 생성 완료
+
+|204
+|응답 값 없음
+|===
+
+=== 실패
+
+[cols=2*]
+|===
+|코드
+|내용
+
+|400
+|잘못된 요청
+
+|401
+|인증 에러
+
+|404
+|존재하지 않는 정보
+
+|500
+|서버 내부 에러
+|===
+
